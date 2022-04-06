@@ -54,8 +54,10 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text('${result!.code!.indexOf(str1)}')
-                  //Text('${result!.code!.substring(indexOf(str1),indexof(str2))}')
+                    // Text('${result!.code!.indexOf(str1)}')
+                    Text(result!.code!.toString().substring(
+                        result!.code!.toString().indexOf(str1),
+                        result!.code!.toString().indexOf(str2)))
                   else
                     Text(''),
                 ],
