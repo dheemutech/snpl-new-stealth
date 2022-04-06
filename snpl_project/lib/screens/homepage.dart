@@ -4,10 +4,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-void main() => runApp( MaterialApp(home: MyHome()));
+void main() => runApp(MaterialApp(home: MyHome()));
 
 class MyHome extends StatelessWidget {
-   MyHome({Key? key}) : super(key: key);
+  MyHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +17,10 @@ class MyHome extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>  QRViewExample(),
+              builder: (context) => QRViewExample(),
             ));
           },
-          child:  Text('QR Scan'),
+          child: Text('QR Scan'),
         ),
       ),
     );
@@ -28,7 +28,7 @@ class MyHome extends StatelessWidget {
 }
 
 class QRViewExample extends StatefulWidget {
-   QRViewExample({Key? key}) : super(key: key);
+  QRViewExample({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRViewExampleState();
@@ -38,7 +38,8 @@ class _QRViewExampleState extends State<QRViewExample> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
+  String str1 = 'pa=';
+  String str2 = 'pn=';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +54,10 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text(
-                        '${result!.code}')
+                    Text('${result!.code!.indexOf(str1)}')
+                  //Text('${result!.code!.substring(indexOf(str1),indexof(str2))}')
                   else
-                     Text(''),
+                    Text(''),
                 ],
               ),
             ),
@@ -65,7 +66,6 @@ class _QRViewExampleState extends State<QRViewExample> {
       ),
     );
   }
-
 
   Widget _buildQrView(BuildContext context) {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
@@ -100,7 +100,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text('no Permission')),
+        SnackBar(content: Text('no Permission')),
       );
     }
   }
