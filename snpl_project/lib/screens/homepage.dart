@@ -54,7 +54,8 @@ class _QRViewExampleState extends State<QRViewExample> {
                 children: <Widget>[
                   if (result != null)
                     Text(
-                        '${result!.code}')
+                        '${result!.code!.indexOf("pa=") + 3}'
+                        )
                   else
                      Text(''),
                 ],
@@ -66,7 +67,13 @@ class _QRViewExampleState extends State<QRViewExample> {
     );
   }
 
-
+// void main() {
+//   var str = "upi://pay?pa=9652354388@paytm&pn=PaytmUser&mc=0000&mode=02&purpose=00&orgid=159761";
+//   int indexPA = str.indexOf("pa=") + 3;
+//   int indexPN = str.indexOf("pn=") -1 ;
+//   var result = str.substring(indexPA, indexPN);
+//   print(result);
+// }
   Widget _buildQrView(BuildContext context) {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
