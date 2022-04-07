@@ -39,8 +39,11 @@ class _QRViewExampleState extends State<QRViewExample> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
+
   @override
   Widget build(BuildContext context) {
+    String str1 = 'pa=';
+    String str2 = 'pn=';
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -53,9 +56,9 @@ class _QRViewExampleState extends State<QRViewExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   if (result != null)
-                    Text(
-                        '${result!.code!.indexOf("pa=") + 3}'
-                        )
+                    Text(result!.code!.toString().substring(
+                        result!.code!.toString().indexOf(str1) + 3,
+                        result!.code!.toString().indexOf(str2) - 1))
                   else
                      Text(''),
                 ],
@@ -67,13 +70,6 @@ class _QRViewExampleState extends State<QRViewExample> {
     );
   }
 
-// void main() {
-//   var str = "upi://pay?pa=9652354388@paytm&pn=PaytmUser&mc=0000&mode=02&purpose=00&orgid=159761";
-//   int indexPA = str.indexOf("pa=") + 3;
-//   int indexPN = str.indexOf("pn=") -1 ;
-//   var result = str.substring(indexPA, indexPN);
-//   print(result);
-// }
   Widget _buildQrView(BuildContext context) {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
