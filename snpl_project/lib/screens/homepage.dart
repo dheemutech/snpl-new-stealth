@@ -3,12 +3,16 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:snpl_project/screens/pay.dart';
 
-void main() => runApp( MaterialApp(home: MyHome()));
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
 
-class MyHome extends StatelessWidget {
-   MyHome({Key? key}) : super(key: key);
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +21,10 @@ class MyHome extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>  QRViewExample(),
+              builder: (context) => QRViewExample(),
             ));
           },
-          child:  Text('QR Scan'),
+          child: Text('QR Scan'),
         ),
       ),
     );
@@ -28,7 +32,7 @@ class MyHome extends StatelessWidget {
 }
 
 class QRViewExample extends StatefulWidget {
-   QRViewExample({Key? key}) : super(key: key);
+  QRViewExample({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRViewExampleState();
@@ -39,32 +43,31 @@ class _QRViewExampleState extends State<QRViewExample> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
-
   @override
   Widget build(BuildContext context) {
-    String str1 = 'pa=';
-    String str2 = 'pn=';
+    // String str1 = 'pa=';
+    // String str2 = 'pn=';
     return Scaffold(
       body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  if (result != null)
-                    Text(result!.code!.toString().substring(
-                        result!.code!.toString().indexOf(str1) + 3,
-                        result!.code!.toString().indexOf(str2) - 1))
-                  else
-                     Text(''),
-                ],
-              ),
-            ),
-          )
+          // Expanded(
+          //   flex: 1,
+          //   child: FittedBox(
+          //     fit: BoxFit.contain,
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: <Widget>[
+          //         if (result != null)
+          //           Text(result!.code!.toString().substring(
+          //               result!.code!.toString().indexOf(str1) + 3,
+          //               result!.code!.toString().indexOf(str2) - 1))
+          //         else
+          //           Text(''),
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
@@ -96,6 +99,10 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
       });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PayPage()),
+      );
     });
   }
 
@@ -103,7 +110,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text('no Permission')),
+        SnackBar(content: Text('no Permission')),
       );
     }
   }
