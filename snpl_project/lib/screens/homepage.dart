@@ -92,21 +92,24 @@ class _QRViewExampleState extends State<QRViewExample> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
+    int i = 0;
+    late String vpa;
     setState(() {
       this.controller = controller;
     });
-    controller.scannedDataStream.listen((scanData) {
+    controller.scannedDataStream.listen((scanData) async {
       setState(() {
-        result = scanData;
+        vpa = scanData.code!.toString().substring(
+            scanData.code!.toString().indexOf('pa=') + 3,
+            scanData.code!.toString().indexOf('pn=') - 1);
       });
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => PayPage(
-                vpa: result!.code!.toString().substring(
-                    result!.code!.toString().indexOf('pa=') + 3,
-                    result!.code!.toString().indexOf('pn=') - 1))),
-      );
+      if (i == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PayPage(vpa: vpa)),
+        );
+      }
+      i += 1;
     });
   }
 
