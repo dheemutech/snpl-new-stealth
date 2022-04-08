@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 
+import '../services/payment.dart';
+
 class PayPage extends StatefulWidget {
-  const PayPage({Key? key}) : super(key: key);
+  final String vpa;
+  const PayPage({Key? key, required this.vpa}) : super(key: key);
 
   @override
   State<PayPage> createState() => _PayPageState();
@@ -11,8 +14,6 @@ class PayPage extends StatefulWidget {
 
 class _PayPageState extends State<PayPage> {
   late TextEditingController textController;
-  String str1 = 'pa=';
-  String str2 = 'pn=';
   @override
   void initState() {
     super.initState();
@@ -31,7 +32,7 @@ class _PayPageState extends State<PayPage> {
           // Text(result!.code!.toString().substring(
           //               result!.code!.toString().indexOf(str1) + 3,
           //               result!.code!.toString().indexOf(str2) - 1)),
-          Text('You are paying',
+          Text('You are paying to ' + widget.vpa,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -40,6 +41,7 @@ class _PayPageState extends State<PayPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: TextFormField(
+              controller: textController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   filled: true,
@@ -66,7 +68,9 @@ class _PayPageState extends State<PayPage> {
             ),
           ),
 
-          ElevatedButton(onPressed: () {}, child: Text('Pay'))
+          ElevatedButton(onPressed: () {
+            postPayment(widget.vpa, int.parse(textController.text));
+          }, child: Text('Pay'))
         ],
       ),
     );

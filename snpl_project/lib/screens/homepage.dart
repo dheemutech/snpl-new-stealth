@@ -101,7 +101,11 @@ class _QRViewExampleState extends State<QRViewExample> {
       });
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PayPage()),
+        MaterialPageRoute(
+            builder: (context) => PayPage(
+                vpa: result!.code!.toString().substring(
+                    result!.code!.toString().indexOf('pa=') + 3,
+                    result!.code!.toString().indexOf('pn=') - 1))),
       );
     });
   }
