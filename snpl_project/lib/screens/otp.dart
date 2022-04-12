@@ -31,12 +31,6 @@ class _OtpScreenState extends State<OtpScreen> {
   bool wait = true;
   String buttonName = "Send";
   @override
-  void initState() {
-    widget.auth!.logInWIthPhone(phone: widget.phoneNumber!);
-    startTimer();
-    wait = true;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
