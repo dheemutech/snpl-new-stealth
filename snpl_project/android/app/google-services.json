@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "137482268912",
+    "project_id": "snpl-stealth",
+    "storage_bucket": "snpl-stealth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137482268912:android:66994e77da9bd90b455235",
+        "android_client_info": {
+          "package_name": "com.surge.snpl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137482268912-3e1f79cas00c7j0l7eo7dlie11dido01.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe52HZXAlRnzX21NTL4AWACDw2dFBHOo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137482268912-3e1f79cas00c7j0l7eo7dlie11dido01.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
