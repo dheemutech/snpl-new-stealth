@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../services/payment.dart';
+//import '../services/payment.dart';
 
 class PayPage extends StatefulWidget {
   final String vpa;
@@ -29,10 +29,7 @@ class _PayPageState extends State<PayPage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
           ),
-          // Text(result!.code!.toString().substring(
-          //               result!.code!.toString().indexOf(str1) + 3,
-          //               result!.code!.toString().indexOf(str2) - 1)),
-          Text('You are paying to ' + widget.vpa,
+          Text('You are paying to ' + widget.vpa,textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -68,8 +65,10 @@ class _PayPageState extends State<PayPage> {
             ),
           ),
 
-          ElevatedButton(onPressed: () {
-            postPayment(widget.vpa, int.parse(textController.text));
+          ElevatedButton(onPressed:  () async{
+            //String id= await postPayment(widget.vpa, int.parse(textController.text));
+            //if(complete== true){
+            //navigate to conf}{push to firebase}{deduct value}else{error}
           }, child: Text('Pay'))
         ],
       ),
