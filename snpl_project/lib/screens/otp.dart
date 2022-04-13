@@ -1,191 +1,154 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:otp_text_field/otp_text_field.dart';
-import 'package:otp_text_field/style.dart';
 
-class OtpScreen extends StatefulWidget {
-  const OtpScreen({
-    required this.phoneNumber,
-    this.name,
-    this.email,
-    required this.registered,
-    Key? key,
-    phoneController,
-  }) : super(key: key);
-
-  final String? phoneNumber;
-  final String? name;
-  final String? email;
-  final bool? registered;
+class OTPScreen extends StatefulWidget {
+  const OTPScreen({Key? key}) : super(key: key);
 
   @override
-  _OtpScreenState createState() => _OtpScreenState();
+  State<OTPScreen> createState() => _OTPScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
-  String? sentCode;
-  String? enteredOTP = '';
-  int start = 30;
-  bool wait = true;
-  String buttonName = "Send";
+class _OTPScreenState extends State<OTPScreen> {
+  final phoneController = TextEditingController();
+  final _controller = TextEditingController();
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xff060427),
+      backgroundColor: Color(0xffffffff),
       body: SingleChildScrollView(
-        child: Form(
+        child: Padding(
+          padding: EdgeInsets.only(left: 20, right: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.12,
+                height: size.height * 0.03,
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50, bottom: 0),
-                  child: Text(
-                    'You are',
-                    style: TextStyle(color: Colors.white, fontSize: 50),
-                  ),
-                ),
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                iconSize: 40,
+                color: Colors.black,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              Center(
-                child: Text(
-                  'almost there!',
-                  style: TextStyle(color: Colors.white, fontSize: 50),
-                ),
+              SizedBox(
+                height: size.height * 0.05,
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "You're safe!",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
+              Text(
+                'Enter the 7-digit code we texted to',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              Text(
+                '+xx xxxx xx88',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              Text(
+                'This extra step shows its really you trying to',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+              ),
+              Text(
+                'sign in',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+              ),
+              SizedBox(
+                height: size.height * 0.05,
+              ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.88,
-                height: MediaQuery.of(context).size.height * 0.075,
-                decoration: BoxDecoration(
-                  color: Color(0xff241252),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.call,
-                        color: Color(0xffD19549),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        '+91 ${widget.phoneNumber}',
-                        style: TextStyle(
-                            color: Colors.white,
+                  alignment: Alignment.centerLeft,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    maxLength: 7,
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffffffff),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2.0),
+                        ),
+                        hintText: '7-digit OTP',
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
                             fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                            color: Color(0xffC9C9C9))),
+                  )),
               SizedBox(
-                height: 10,
+                height: size.height * 0.05,
               ),
-              OTPTextField(
-                length: 6,
-                width: MediaQuery.of(context).size.width * 0.92,
-                fieldWidth: MediaQuery.of(context).size.width * 0.11,
-                otpFieldStyle: OtpFieldStyle(
-                  backgroundColor: Color(0xffffffff),
-                  borderColor: Color(0xff047327),
-                  enabledBorderColor: Color(0xff452ac6),
-                  focusBorderColor: Color(0xff452ac6),
-                ),
-                style: TextStyle(fontSize: 17, color: Colors.black),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.box,
-                onCompleted: (pin) {
-                  enteredOTP = pin;
-                },
-                onChanged: (pin) {},
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (enteredOTP!.length < 6) {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            content: Text('Invalid OTP'),
-                          );
-                        });
-                  } else {
-                  }
-                },
-                child: Text(
-                  'Verify',
-                  style: TextStyle(
-                    color: Color(0xffffffff),
-                    fontWeight: FontWeight.w800,
-                    fontSize: 25,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => OTPScreen()));
+                  },
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Color(0xffffffff),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 10,
+                    primary: Color(0xff9B4BFF),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: size.width * 0.36,
+                        vertical: size.height * 0.02),
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'I need help',
+                    style: TextStyle(
+                      color: Color(0xff000000),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                    ),
                   ),
-                  elevation: 10,
-                  primary: Color(0xff9B4BFF),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.33,
-                      vertical: MediaQuery.of(context).size.height * 0.012),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    primary: Color(0xffffffff),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: size.width * 0.32,
+                        vertical: size.height * 0.02),
+                  ),
                 ),
               ),
-              Center(
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Resend OTP',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800),
-                      ))),
             ],
           ),
         ),
       ),
     ));
-  }
-
-  void startTimer() {
-    const onsec = Duration(seconds: 1);
-    // ignore: unused_local_variable
-    Timer _timer = Timer.periodic(onsec, (timer) {
-      if (start == 0) {
-        setState(() {
-          timer.cancel();
-          wait = false;
-        });
-      } else {
-        setState(() {
-          start--;
-        });
-      }
-    });
   }
 }

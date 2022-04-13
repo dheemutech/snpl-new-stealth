@@ -44,11 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-<<<<<<< HEAD
-        applicationId "com.example.snpl_project"
-=======
         applicationId "com.surge.snpl"
->>>>>>> 2553d0ac488a2a5981bc8dc60ebb8e65f1b25845
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
