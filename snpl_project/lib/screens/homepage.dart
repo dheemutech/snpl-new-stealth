@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
-
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -13,62 +12,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => QRViewExample(),
-            ));
-          },
-          child: Text('QR Scan'),
-        ),
-      ),
-    );
-  }
-}
-
-class QRViewExample extends StatefulWidget {
-  QRViewExample({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
-}
-
-class _QRViewExampleState extends State<QRViewExample> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
+  String qrcode = ' ';
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // String str1 = 'pa=';
-    // String str2 = 'pn=';
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-          // Expanded(
-          //   flex: 1,
-          //   child: FittedBox(
-          //     fit: BoxFit.contain,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       children: <Widget>[
-          //         if (result != null)
-          //           Text(result!.code!.toString().substring(
-          //               result!.code!.toString().indexOf(str1) + 3,
-          //               result!.code!.toString().indexOf(str2) - 1))
-          //         else
-          //           Text(''),
-          //       ],
-          //     ),
-          //   ),
-          // )
-        ],
+      appBar: AppBar(
+        title: const Text('SNPL'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Wrap(
+              children: [
+                SizedBox(width: 20),
+                ElevatedButton(
+                  child: Text('Scan'),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return _buildQrView(context);
+                    }));
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
