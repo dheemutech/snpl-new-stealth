@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables
 import 'dart:developer';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:snpl_project/screens/pay.dart';
@@ -24,25 +25,124 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SNPL'),
-      ),
+      backgroundColor: Color(0xff6E5454),
       body: Center(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Wrap(
+            SizedBox(
+              height: size.height * 0.1,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 20),
-                ElevatedButton(
-                  child: Text('Scan'),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return _buildQrView(context);
-                    }));
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Hi User,',
+                    style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    'you have a credit limit of',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.attach_money,
+                        color: Colors.white,
+                        size: 38,
+                      ),
+                      Text('750',
+                          style: TextStyle(
+                              fontSize: 40,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            Container(
+              width: size.width,
+              height: size.height / 1.365,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(40.0),
+                    topLeft: Radius.circular(40.0),
+                  )),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.05,
+                  ),
+                  Image(image: AssetImage('home.png')),
+                  SizedBox(
+                    height: size.height * 0.05,
+                  ),
+                  Center(
+                    child: Text(
+                      "Welcome to SNPL!",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.qr_code_scanner, size: 35),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Scan and Pay',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return _buildQrView(context);
+                      }));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                      ),
+                      elevation: 10,
+                      primary: Color(0xff9B4BFF),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.1,
+                          vertical: size.height * 0.02),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.08,
+                  )
+                ],
+              ),
             ),
           ],
         ),

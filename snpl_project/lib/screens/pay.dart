@@ -13,63 +13,139 @@ class PayPage extends StatefulWidget {
 }
 
 class _PayPageState extends State<PayPage> {
-  late TextEditingController textController;
+  late TextEditingController _controller;
+
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xffffffff),
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: size.height * 0.1,
           ),
-          Text('You are paying to ' + widget.vpa,textAlign: TextAlign.center,
+          Icon(
+            Icons.person,
+            size: size.height * 0.1,
+            color: Colors.blue,
+          ),
+          Text(
+            "Name",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          ),
+          Text(widget.vpa,
+              textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.w500)),
-          SizedBox(height: 20),
+          SizedBox(height: size.height * 0.2),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            child: TextFormField(
-              controller: textController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 2.0),
-                  ),
-                  prefixIcon: Icon(
-                    Icons.currency_rupee,
-                    color: Colors.black,
-                  ),
-                  hintText: ('Enter Amount'),
-                  hintStyle: TextStyle(color: Colors.black)),
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              width: size.width,
+              height: size.height * 0.15,
+              decoration: BoxDecoration(
+                  color: Color(0xffD8D8D8),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'you are paying',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        cursorHeight: 25,
+                        controller: _controller,
+                        style: TextStyle(fontSize: 25),
+                        // onSubmitted: (String value) async {
+                        //   await showDialog<void>(
+                        //     context: context,
+                        //     builder: (BuildContext context) {
+                        //       return AlertDialog(
+                        //         title: const Text('Thanks!'),
+                        //         content: Text(
+                        //             'You typed "$value", which has length ${value.characters.length}.'),
+                        //         actions: <Widget>[
+                        //           TextButton(
+                        //             onPressed: () {
+                        //               Navigator.pop(context);
+                        //             },
+                        //             child: const Text('OK'),
+                        //           ),
+                        //         ],
+                        //       );
+                        //     },
+                        //   );
+                        // },
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              textAlign: TextAlign.start,
             ),
           ),
-
-          ElevatedButton(onPressed:  () async{
-            //String id= await postPayment(widget.vpa, int.parse(textController.text));
-            //if(complete== true){
-            //navigate to conf}{push to firebase}{deduct value}else{error}
-          }, child: Text('Pay'))
+          Spacer(),
+          //       //String id= await postPayment(widget.vpa, int.parse(textController.text));
+          //       //if(complete== true){
+          //       //navigate to conf}{push to firebase}{deduct value}else{error}
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Column(
+              children: [
+                Text('FROM HDFC a/c XX7383',style: TextStyle(fontSize: 15),),
+                SizedBox(height: 5,),
+                ElevatedButton(
+                  onPressed: (){},
+                  child: Text(
+                    "Pay",
+                    style: TextStyle(
+                      color: Color(0xffffffff),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 25,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 10,
+                    primary: Color(0xff9B4BFF),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: size.width * 0.36,
+                        vertical: size.height * 0.02),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
