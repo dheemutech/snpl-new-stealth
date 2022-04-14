@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-//import '../services/payment.dart';
+import '../screens/confirmation.dart';
+import '../screens/error.dart';
+import '../services/payment.dart';
 
 class PayPage extends StatefulWidget {
   final String vpa;
@@ -120,10 +122,39 @@ class _PayPageState extends State<PayPage> {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               children: [
-                Text('FROM HDFC a/c XX7383',style: TextStyle(fontSize: 15),),
-                SizedBox(height: 5,),
+                Text(
+                  'FROM HDFC a/c XX7383',
+                  style: TextStyle(fontSize: 15),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: () async {
+                    String id = await postPayment(
+                        widget.vpa, int.parse(_controller.text));
+                    if (id == 'error') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ErrorPage()),
+                      );
+                      return;
+                    }
+
+                    bool paymentStatus = await isPaymentComplete(id);
+                    if (paymentStatus) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ConfirmationPage()),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ErrorPage()),
+                      );
+                    }
+                  },
                   child: Text(
                     "Pay",
                     style: TextStyle(

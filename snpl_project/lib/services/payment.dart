@@ -43,10 +43,6 @@ Future<String> postPayment(String vpa, int amount) async {
     }),
   );
 
-  String status =
-      await isPaymentComplete(jsonDecode(res.body)['id']) ? 'done' : 'not done';
-  print(status);
-
   if (res.statusCode != 200) return 'error';
   return jsonDecode(res.body)['id'];
 }
