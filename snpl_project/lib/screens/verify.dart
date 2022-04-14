@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screens/uplpic.dart';
+import 'package:snpl_project/screens/homepage.dart';
 
 class ConfirmPg extends StatefulWidget {
   const ConfirmPg({Key? key}) : super(key: key);
@@ -87,7 +87,7 @@ class _ConfirmPgState extends State<ConfirmPg> {
               child: ElevatedButton(
                 onPressed: () async {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UploadPic()));
+                      MaterialPageRoute(builder: (context) => HomePage()));
                 },
                 child: Text(
                   'Submit',
