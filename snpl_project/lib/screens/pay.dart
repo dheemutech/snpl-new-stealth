@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-//import '../services/payment.dart';
+import '../screens/confirmation.dart';
+import '../screens/error.dart';
+import '../services/payment.dart';
 
 class PayPage extends StatefulWidget {
   final String vpa;
@@ -65,10 +67,28 @@ class _PayPageState extends State<PayPage> {
             ),
           ),
 
-          ElevatedButton(onPressed:  () async{
-            //String id= await postPayment(widget.vpa, int.parse(textController.text));
-            //if(complete== true){
-            //navigate to conf}{push to firebase}{deduct value}else{error}
+          ElevatedButton(onPressed:  () async {
+            String id = await postPayment(widget.vpa, int.parse(textController.text));
+            if (id == 'error') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ErrorPage()),
+              );
+              return;
+            }
+
+            bool paymentStatus = await isPaymentComplete(id);
+            if (paymentStatus) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConfirmationPage()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ErrorPage()),
+              );
+            }
           }, child: Text('Pay'))
         ],
       ),
