@@ -42,7 +42,7 @@ dependencies:
   cloud_firestore: ^3.1.11
   firebase_auth: ^3.3.13
   otp_text_field: ^1.1.2
-  image_picker: ^0.8.5
+  #image_picker: ^0.8.5
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +73,8 @@ flutter:
     - Upload.png
     - Verified.png
     - home.png
+    - success.gif
+    - fail.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
