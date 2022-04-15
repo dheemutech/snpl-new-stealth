@@ -2,8 +2,10 @@
 
 import 'dart:ui';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screens/otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen(this.phoneController, {Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ final _formKey = GlobalKey<FormState>();
 class _LoginScreenState extends State<LoginScreen> {
   final phoneController = TextEditingController();
   final _controller = TextEditingController();
+  final _auth = FirebaseAuth.instance;
   @override
   void dispose() {
     _controller.dispose();
@@ -139,11 +142,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ElevatedButton(
                     onPressed: () async {
-                      
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => OTPScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => OTPScreen()));
                     },
                     child: Text(
                       'Sign In',

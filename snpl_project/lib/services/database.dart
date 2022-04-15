@@ -27,3 +27,6 @@ class Database {
     await documentReference.set(data);
   }
 }
+//fetch current use detail
+//try catch block in add user
+//
