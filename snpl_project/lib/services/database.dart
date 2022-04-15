@@ -16,17 +16,18 @@ class Database {
 
   static Future<void> addUser(String name, String email, int number,
       int aadharNumber, int creditLeft) async {
-    DocumentReference documentReference = _collectionReferenceUSER.doc();
-    Map<String, dynamic> data = <String, dynamic>{
-      "name": name,
-      "email": email,
-      "number": number,
-      "aadhar_number": aadharNumber,
-      "credit_left": creditLeft,
-    };
-    await documentReference.set(data);
+    try {
+      DocumentReference documentReference = _collectionReferenceUSER.doc();
+      Map<String, dynamic> data = <String, dynamic>{
+        "name": name,
+        "email": email,
+        "number": number,
+        "aadhar_number": aadharNumber,
+        "credit_left": creditLeft,
+      };
+      await documentReference.set(data);
+    } catch (e) {
+      print(e);
+    }
   }
 }
-//fetch current user detail
-//try catch block in add user
-//

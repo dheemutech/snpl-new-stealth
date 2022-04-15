@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import, unused_field, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -143,6 +144,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () async {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => OTPScreen()));
+                      ConfirmationResult result =
+                          await _auth.signInWithPhoneNumber("+9411600717");
+                      UserCredential userCredential =
+                          await result.confirm('696969');
+                      log(userCredential.toString());
+                      log(result.toString());
                     },
                     child: Text(
                       'Sign In',
