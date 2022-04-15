@@ -96,7 +96,6 @@ class _PayPageState extends State<PayPage> {
                 ),
               ),
             ),
-            //Spacer(),
             SizedBox(height: size.height * 0.25),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

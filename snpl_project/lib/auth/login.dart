@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import, unused_field, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screens/otp.dart';
 
@@ -98,16 +100,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: widget.phoneController,
                       style: TextStyle(fontSize: 20, color: Colors.black),
                       maxLength: 10,
-                      // validator: (value) {
-                      //   if (value == null) {
-                      //     return 'Please enter phone number';
-                      //   } else if (value.length < 10 ||
-                      //       int.tryParse(value) == null) {
-                      //     return 'Enter valid phone number';
-                      //   } else {
-                      //     return null;
-                      //   }
-                      // },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter phone number';
+                        } else if (value.length < 10 ||
+                            int.tryParse(value) == null) {
+                          return 'Enter valid phone number';
+                        } else {
+                          return null;
+                        }
+                      },
                       decoration: InputDecoration(
                           fillColor: Color(0xffffffff),
                           filled: true,
@@ -138,11 +140,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ElevatedButton(
                     onPressed: () async {
-                      
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => OTPScreen()));
+                      if (_formKey.currentState!.validate()) {
+                        var doc = await FirebaseFirestore.instance
+                            .collection('user')
+                            .doc('+91' + phoneController.text)
+                            .get();
+                        if (doc.exists) {
+                          
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OTPScreen()));
+                        }
+                      }
                     },
                     child: Text(
                       'Sign In',
