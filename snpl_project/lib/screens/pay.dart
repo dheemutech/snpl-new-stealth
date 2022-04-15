@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screens/loader.dart';
 
 import '../screens/confirmation.dart';
 import '../screens/error.dart';
@@ -111,6 +112,10 @@ class _PayPageState extends State<PayPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Loader()),
+                      );
                       String id = await postPayment(
                           widget.vpa, int.parse(_controller.text));
                       if (id == 'error') {

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screens/homepage.dart';
-import 'package:snpl_project/screens/loader.dart';
 import 'package:snpl_project/screens/subTile.dart';
 
 class ConfirmationPage extends StatefulWidget {
@@ -13,11 +12,8 @@ class ConfirmationPage extends StatefulWidget {
 }
 
 class _ConfirmationPageState extends State<ConfirmationPage> {
-  bool isLoading = true;
   @override
-  Widget build(BuildContext context) => isLoading
-      ? Loader()
-      : Scaffold(
+  Widget build(BuildContext context) => Scaffold(
           backgroundColor: Colors.white,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
