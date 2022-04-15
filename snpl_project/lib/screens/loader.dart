@@ -17,8 +17,8 @@ class _LoaderState extends State<Loader> {
       backgroundColor: Colors.white,
       body: Center(
         child: SpinKitThreeInOut(
-          size: 100,
-          duration: Duration(seconds: 20),
+          size: 30,
+          duration: Duration(seconds: 50),
           itemBuilder: (BuildContext context, int index) {
             return DecoratedBox(
                 decoration: BoxDecoration(
