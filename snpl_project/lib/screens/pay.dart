@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screens/loader.dart';
 
 import '../screens/confirmation.dart';
 import '../screens/error.dart';
@@ -15,6 +16,7 @@ class PayPage extends StatefulWidget {
 }
 
 class _PayPageState extends State<PayPage> {
+  bool isLoading = false;
   late TextEditingController _controller;
 
   @override
@@ -88,26 +90,6 @@ class _PayPageState extends State<PayPage> {
                           cursorHeight: 25,
                           controller: _controller,
                           style: TextStyle(fontSize: 25),
-                          // onSubmitted: (String value) async {
-                          //   await showDialog<void>(
-                          //     context: context,
-                          //     builder: (BuildContext context) {
-                          //       return AlertDialog(
-                          //         title: const Text('Thanks!'),
-                          //         content: Text(
-                          //             'You typed "$value", which has length ${value.characters.length}.'),
-                          //         actions: <Widget>[
-                          //           TextButton(
-                          //             onPressed: () {
-                          //               Navigator.pop(context);
-                          //             },
-                          //             child: const Text('OK'),
-                          //           ),
-                          //         ],
-                          //       );
-                          //     },
-                          //   );
-                          // },
                         ),
                       ),
                     ],
@@ -130,6 +112,10 @@ class _PayPageState extends State<PayPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Loader()),
+                      );
                       String id = await postPayment(
                           widget.vpa, int.parse(_controller.text));
                       if (id == 'error') {
@@ -140,6 +126,7 @@ class _PayPageState extends State<PayPage> {
                         return;
                       }
                       bool paymentStatus = await isPaymentComplete(id);
+
                       if (paymentStatus) {
                         Navigator.push(
                           context,
@@ -168,7 +155,7 @@ class _PayPageState extends State<PayPage> {
                       elevation: 10,
                       primary: Color(0xff9B4BFF),
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.4,
+                          horizontal: size.width * 0.42,
                           vertical: size.height * 0.02),
                     ),
                   ),
