@@ -7,6 +7,7 @@ import 'package:snpl_project/screens/firstpage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  
   runApp(MyApp());
 }
 
