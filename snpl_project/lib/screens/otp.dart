@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screens/view.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key}) : super(key: key);
@@ -93,17 +94,17 @@ class _OTPScreenState extends State<OTPScreen> {
                             color: Color(0xffC9C9C9))),
                   )),
               SizedBox(
-                height: size.height * 0.05,
+                height: size.height * 0.3,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ElevatedButton(
                   onPressed: () async {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => OTPScreen()));
+                        MaterialPageRoute(builder: (context) => ViewPage()));
                   },
                   child: Text(
-                    'Sign In',
+                    'Submit',
                     style: TextStyle(
                       color: Color(0xffffffff),
                       fontWeight: FontWeight.w800,
@@ -123,7 +124,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ElevatedButton(
                   onPressed: () {},
                   child: Text(
@@ -136,6 +137,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
+                       side: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     primary: Color(0xffffffff),

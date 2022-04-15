@@ -1,6 +1,5 @@
 // ignore_for_file: unused_import, unused_field, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
