@@ -1,24 +1,29 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, unused_local_variable
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screens/homepage.dart';
 import 'package:snpl_project/screens/view.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({Key? key}) : super(key: key);
+  final String phone;
+  const OTPScreen(this.phone);
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  final phoneController = TextEditingController();
+  String? enteredOTP = '';
   final _controller = TextEditingController();
+  final _auth = FirebaseAuth.instance;
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  String verificationIDRecieved = '';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,7 +55,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
               Text(
-                '+xx xxxx xx88',
+                ' +91 ${widget.phone}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               SizedBox(
@@ -70,10 +75,34 @@ class _OTPScreenState extends State<OTPScreen> {
               Container(
                   alignment: Alignment.centerLeft,
                   height: MediaQuery.of(context).size.height * 0.1,
-                  child: TextFormField(
+                  child: TextField(
+                    controller: _controller,
                     keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20, color: Colors.black),
                     maxLength: 7,
+                    onChanged: (pin) {
+                      enteredOTP = pin;
+                    },
+                    onSubmitted: (enteredOTP) async {
+                      await _auth
+                          .signInWithCredential(PhoneAuthProvider.credential(
+                              verificationId: verificationIDRecieved,
+                              smsCode: enteredOTP))
+                          .then((value) async {
+                        if (value.user != null) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewPage()));
+                        }
+                      });
+                    },
                     decoration: InputDecoration(
                         fillColor: Color(0xffffffff),
                         filled: true,
@@ -99,9 +128,20 @@ class _OTPScreenState extends State<OTPScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ViewPage()));
+                  onPressed: ()
+                  async {
+                    if (enteredOTP!.length < 8) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: Text('Invalid OTP'),
+                            );
+                          });
+                    } else {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ViewPage()));
+                    }
                   },
                   child: Text(
                     'Submit',
@@ -137,7 +177,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                       side: BorderSide(color: Colors.black),
+                      side: BorderSide(color: Colors.black),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     primary: Color(0xffffffff),
@@ -152,5 +192,38 @@ class _OTPScreenState extends State<OTPScreen> {
         ),
       ),
     ));
+  }
+
+  verifyPhone() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+91 ${widget.phone}',
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        await _auth.signInWithCredential(credential).then((value) async {
+          if (value.user != null) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+                (route) => false);
+          }
+        });
+      },
+      verificationFailed: (FirebaseAuthException exception) {},
+      codeSent: (String verificationID, int? resendToken) {
+        setState(() {
+          verificationIDRecieved = verificationID;
+        });
+      },
+      codeAutoRetrievalTimeout: (String verificationID) {
+        setState(() {
+          verificationIDRecieved = verificationID;
+        });
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    verifyPhone();
   }
 }

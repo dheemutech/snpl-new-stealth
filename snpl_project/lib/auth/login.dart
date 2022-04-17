@@ -1,8 +1,11 @@
 // ignore_for_file: unused_import, unused_field, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screens/otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen(this.phoneController, {Key? key}) : super(key: key);
@@ -15,12 +18,8 @@ final _formKey = GlobalKey<FormState>();
 
 class _LoginScreenState extends State<LoginScreen> {
   final phoneController = TextEditingController();
-  final _controller = TextEditingController();
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  // final _auth = FirebaseAuth.instance;
+  // String verificationIDRecieved = '';
 
   @override
   Widget build(BuildContext context) {
@@ -95,19 +94,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      controller: widget.phoneController,
+                      controller: phoneController,
                       style: TextStyle(fontSize: 20, color: Colors.black),
                       maxLength: 10,
-                      // validator: (value) {
-                      //   if (value == null) {
-                      //     return 'Please enter phone number';
-                      //   } else if (value.length < 10 ||
-                      //       int.tryParse(value) == null) {
-                      //     return 'Enter valid phone number';
-                      //   } else {
-                      //     return null;
-                      //   }
-                      // },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Please enter phone number';
+                        } else if (value.length < 10 ||
+                            int.tryParse(value) == null) {
+                          return 'Enter valid phone number';
+                        } else {
+                          return null;
+                        }
+                      },
                       decoration: InputDecoration(
                           fillColor: Color(0xffffffff),
                           filled: true,
@@ -137,20 +136,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ElevatedButton(
-                    onPressed: () async {
-                      // if (_formKey.currentState!.validate()) {
-                      //   var doc = await FirebaseFirestore.instance
-                      //       .collection('user')
-                      //       .doc('+91' + phoneController.text)
-                      //       .get();
-                      //   if (doc.exists) {
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OTPScreen()));
-                        //}
-                      //}
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                OTPScreen(phoneController.text)));
+                      }
                     },
                     child: Text(
                       'Sign In',
