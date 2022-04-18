@@ -5,6 +5,7 @@ import 'package:snpl_project/screens/loader.dart';
 
 import '../screens/confirmation.dart';
 import '../screens/error.dart';
+import '../services/database.dart';
 import '../services/payment.dart';
 
 class PayPage extends StatefulWidget {
@@ -127,6 +128,8 @@ class _PayPageState extends State<PayPage> {
                       bool paymentStatus = await isPaymentComplete(id);
 
                       if (paymentStatus) {
+                        // TODO : implement dynamic UserID
+                        Database.postTransactions(widget.vpa, int.parse(_controller.text), "userId");
                         Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -14,6 +14,20 @@ class Database {
     return transactionCollection.snapshots();
   }
 
+  static Future<void> postTransactions(String vpa, int payment, String userId) async {
+    try {
+      DocumentReference documentReference = _collectionReferenceTRANSACTION.doc();
+      Map<String, dynamic> data = <String, dynamic>{
+        "vpa": vpa,
+        "payment": payment,
+        "user_id": userId,
+      };
+      await documentReference.set(data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<void> addUser(String name, String email, int number,
       int aadharNumber, int creditLeft) async {
     try {
