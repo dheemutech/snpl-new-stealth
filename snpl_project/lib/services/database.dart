@@ -28,16 +28,18 @@ class Database {
     }
   }
 
-  static Future<void> addUser(String name, String email, int number,
-      int aadharNumber, int creditLeft) async {
+
+
+
+  static Future<void> addUser(String name, String email, int phoneNumber) async {
     try {
       DocumentReference documentReference = _collectionReferenceUSER.doc();
       Map<String, dynamic> data = <String, dynamic>{
         "name": name,
         "email": email,
-        "number": number,
-        "aadhar_number": aadharNumber,
-        "credit_left": creditLeft,
+        "phone_number": phoneNumber,
+        // "aadhar_number": aadharNumber,
+        "credit_left": 500, // default credit
       };
       await documentReference.set(data);
     } catch (e) {

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screens/view2.dart';
+import 'package:snpl_project/services/database.dart';
 
 class CreateAcc extends StatefulWidget {
   const CreateAcc({Key? key}) : super(key: key);
@@ -11,6 +12,12 @@ class CreateAcc extends StatefulWidget {
 }
 
 class _CreateAccState extends State<CreateAcc> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+
+  // TODO: Implement either input field or pass from parent
+  final phoneController = TextEditingController(text: "9876543210");
+
   bool checkedValue = false;
   @override
   Widget build(BuildContext context) {
@@ -58,6 +65,7 @@ class _CreateAccState extends State<CreateAcc> {
                 alignment: Alignment.centerLeft,
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: TextFormField(
+                  controller: nameController,
                   keyboardType: TextInputType.name,
                   style: TextStyle(fontSize: 20, color: Colors.black),
                   decoration: InputDecoration(
@@ -99,6 +107,7 @@ class _CreateAccState extends State<CreateAcc> {
                 alignment: Alignment.centerLeft,
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: TextFormField(
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   style: TextStyle(fontSize: 20, color: Colors.black),
                   decoration: InputDecoration(
@@ -234,6 +243,7 @@ class _CreateAccState extends State<CreateAcc> {
             padding: const EdgeInsets.only(left: 20),
             child: ElevatedButton(
               onPressed: () async {
+                Database.addUser(nameController.text, emailController.text, int.parse(phoneController.text));
                 Navigator.push(
                     context,
                     MaterialPageRoute(
