@@ -5,7 +5,8 @@ import 'package:snpl_project/screens/view2.dart';
 import 'package:snpl_project/services/database.dart';
 
 class CreateAcc extends StatefulWidget {
-  const CreateAcc({Key? key}) : super(key: key);
+  const CreateAcc(this.phoneNumber, {Key? key}) : super(key: key);
+  final String phoneNumber;
 
   @override
   State<CreateAcc> createState() => _CreateAccState();
@@ -14,9 +15,6 @@ class CreateAcc extends StatefulWidget {
 class _CreateAccState extends State<CreateAcc> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-
-  // TODO: Implement either input field or pass from parent
-  final phoneController = TextEditingController(text: "9876543210");
 
   bool checkedValue = false;
   @override
@@ -243,14 +241,14 @@ class _CreateAccState extends State<CreateAcc> {
             padding: const EdgeInsets.only(left: 20),
             child: ElevatedButton(
               onPressed: () async {
-                Database.addUser(nameController.text, emailController.text, int.parse(phoneController.text));
+                Database.addUser(nameController.text, emailController.text, int.parse(widget.phoneNumber));
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ViewPage2()));
               },
               child: Text(
-                'Start',
+                'Submit',
                 style: TextStyle(
                   color: Color(0xffffffff),
                   fontWeight: FontWeight.w800,

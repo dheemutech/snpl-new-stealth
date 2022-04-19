@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:snpl_project/screens/createacc.dart';
 
 class ViewPage extends StatefulWidget {
-  const ViewPage({Key? key}) : super(key: key);
+  const ViewPage(this.phoneNumber, {Key? key}) : super(key: key);
+  final String phoneNumber;
 
   @override
   State<ViewPage> createState() => _ViewPageState();
@@ -218,10 +219,10 @@ class _ViewPageState extends State<ViewPage> {
               child: ElevatedButton(
                 onPressed: () async {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CreateAcc()));
+                      MaterialPageRoute(builder: (context) => CreateAcc(widget.phoneNumber)));
                 },
                 child: Text(
-                  'Submit',
+                  'Start',
                   style: TextStyle(
                     color: Color(0xffffffff),
                     fontWeight: FontWeight.w800,

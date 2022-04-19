@@ -99,7 +99,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ViewPage()));
+                                  builder: (context) => ViewPage(widget.phone)));
                         }
                       });
                     },
@@ -140,7 +140,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           });
                     } else {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ViewPage()));
+                          MaterialPageRoute(builder: (context) => ViewPage(widget.phone)));
                     }
                   },
                   child: Text(
