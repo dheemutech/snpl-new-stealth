@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screens3/homepage.dart';
 import 'package:snpl_project/services/database.dart';
-
-import '../screens3/view2.dart';
 
 class CreateAcc extends StatefulWidget {
   const CreateAcc(this.phoneNumber, {Key? key}) : super(key: key);
@@ -183,7 +182,7 @@ class _CreateAccState extends State<CreateAcc> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ViewPage2()));
+                        builder: (context) => HomePage()));
               },
               child: Text(
                 'Submit',

@@ -18,11 +18,17 @@ class PayPage extends StatefulWidget {
 class _PayPageState extends State<PayPage> {
   bool isLoading = false;
   late TextEditingController _controller;
+  String payeeName = "";
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
+    setPayeeName();
+  }
+
+  void setPayeeName() async {
+    payeeName = await getPayeeName(widget.vpa);
   }
 
   @override
@@ -48,7 +54,7 @@ class _PayPageState extends State<PayPage> {
               color: Colors.blue,
             ),
             Text(
-              "Name",
+              payeeName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
             Text(widget.vpa,
@@ -127,7 +133,8 @@ class _PayPageState extends State<PayPage> {
                       bool paymentStatus = await isPaymentComplete(id);
 
                       if (paymentStatus) {
-                        Database.postTransactions(widget.vpa, int.parse(_controller.text), "userId");
+                        Database.postTransactions(widget.vpa, int.parse(_controller.text), "15A8EsUg3atjcs4v6jBl");
+                        Database.deductCredit("15A8EsUg3atjcs4v6jBl", int.parse(_controller.text));
                         Navigator.push(
                           context,
                           MaterialPageRoute(

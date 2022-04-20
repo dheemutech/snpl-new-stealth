@@ -44,7 +44,7 @@ class _FirstPgState extends State<FirstPg> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LoginScreen(phoneController)));
+                        builder: (context) => LoginScreen()));
               },
               child: Text(
                 'Login',
