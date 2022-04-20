@@ -1,24 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/otp_field_style.dart';
-import 'package:otp_text_field/style.dart';
-import 'package:snpl_project/screens/verify.dart';
 
-class IDProof extends StatefulWidget {
-  const IDProof({Key? key}) : super(key: key);
+import '../screen2/id.dart';
+
+class ViewPage2 extends StatefulWidget {
+  const ViewPage2({Key? key}) : super(key: key);
 
   @override
-  State<IDProof> createState() => _IDProofState();
+  State<ViewPage2> createState() => _ViewPage2State();
 }
 
-class _IDProofState extends State<IDProof> {
+class _ViewPage2State extends State<ViewPage2> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
+      body: SingleChildScrollView(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
@@ -35,53 +34,51 @@ class _IDProofState extends State<IDProof> {
           SizedBox(
             height: size.height * 0.02,
           ),
+          SizedBox(
+              width: size.width,
+              child: Image(image: AssetImage('assets/VerifyEmail.png'))),
+          SizedBox(
+            height: size.height * 0.03,
+          ),
+          Center(
+              child: Text(
+            'Verify your photo ID',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          )),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
           Padding(
-            padding: EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 20, right: 10),
             child: Text(
-              "ID-proof",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              'Financial regulations require us to verify your ID. This helps prevent someone else from creating a account in your name',
+              style: TextStyle(fontSize: 20),
             ),
           ),
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.02,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 22),
+            padding: const EdgeInsets.only(left: 20, right: 10),
             child: Text(
-              "ID number",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+              'After this step, you’ll be ready to scan and pay',
+              style: TextStyle(fontSize: 20),
             ),
           ),
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.25,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: SizedBox(
-              width: size.width - 10,
-              child: OTPTextField(
-                otpFieldStyle:OtpFieldStyle(backgroundColor: Colors.transparent),
-                length: 12,
-                width: size.width * 0.1,
-                fieldWidth: 15,
-                style: TextStyle(fontSize: 20),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.underline,
-              ),
-            ),
-          ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 10),
             child: ElevatedButton(
               onPressed: () async {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ConfirmPg()));
+                        builder: (context) => IDProof()));
               },
               child: Text(
-                'Start',
+                'Continue',
                 style: TextStyle(
                   color: Color(0xffffffff),
                   fontWeight: FontWeight.w800,
@@ -95,16 +92,13 @@ class _IDProofState extends State<IDProof> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.39,
+                    horizontal: size.width * 0.37,
                     vertical: size.height * 0.02),
               ),
             ),
           ),
-          SizedBox(
-            height: size.height * 0.02,
-          ),
         ],
-      ),
+      )),
     );
   }
 }

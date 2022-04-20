@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screens/homepage.dart';
-import 'package:snpl_project/screens/view.dart';
+import 'package:snpl_project/screen2/createacc.dart';
+import '../screens3/homepage.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
@@ -51,7 +51,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 height: size.height * 0.05,
               ),
               Text(
-                'Enter the 7-digit code we texted to',
+                'Enter the 6-digit code we texted to',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
               Text(
@@ -79,7 +79,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     controller: _controller,
                     keyboardType: TextInputType.number,
                     style: TextStyle(fontSize: 20, color: Colors.black),
-                    maxLength: 7,
+                    maxLength: 6,
                     onChanged: (pin) {
                       enteredOTP = pin;
                     },
@@ -99,7 +99,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ViewPage()));
+                                  builder: (context) => CreateAcc()));
                         }
                       });
                     },
@@ -116,7 +116,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           borderSide:
                               const BorderSide(color: Colors.black, width: 2.0),
                         ),
-                        hintText: '7-digit OTP',
+                        hintText: '6-digit OTP',
                         hintStyle: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
@@ -128,9 +128,8 @@ class _OTPScreenState extends State<OTPScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ElevatedButton(
-                  onPressed: ()
-                  async {
-                    if (enteredOTP!.length < 8) {
+                  onPressed: () async {
+                    if (enteredOTP!.length < 6) {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -140,7 +139,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           });
                     } else {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ViewPage()));
+                          MaterialPageRoute(builder: (context) => CreateAcc()));
                     }
                   },
                   child: Text(
@@ -194,7 +193,7 @@ class _OTPScreenState extends State<OTPScreen> {
     ));
   }
 
-  verifyPhone() async {
+  Future verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+91 ${widget.phone}',
       verificationCompleted: (PhoneAuthCredential credential) async {

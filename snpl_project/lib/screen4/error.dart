@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screens/homepage.dart';
-import 'package:snpl_project/screens/subTile.dart';
+
+import '../screens3/homepage.dart';
+import '../screens3/subTile.dart';
 
 class ErrorPage extends StatefulWidget {
   const ErrorPage({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../auth/login.dart';
+import 'login.dart';
 
 class FirstPg extends StatefulWidget {
   const FirstPg({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _FirstPgState extends State<FirstPg> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.42,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -5,10 +5,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loader extends StatefulWidget {
   const Loader({Key? key}) : super(key: key);
-
   @override
   State<Loader> createState() => _LoaderState();
 }
+
 
 class _LoaderState extends State<Loader> {
   @override
@@ -16,15 +16,10 @@ class _LoaderState extends State<Loader> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: SpinKitThreeInOut(
-          size: 30,
-          duration: Duration(seconds: 50),
-          itemBuilder: (BuildContext context, int index) {
-            return DecoratedBox(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: index.isEven ? Colors.green : Colors.red));
-          },
+        child: SpinKitPouringHourGlass(
+          size: 60,
+          duration: Duration(seconds: 5),
+          color: Colors.black,
         ),
       ),
     );

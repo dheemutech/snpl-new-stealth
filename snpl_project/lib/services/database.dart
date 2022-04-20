@@ -1,5 +1,7 @@
 //import 'package:firebase_core/firebase_core.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:firebase_core/firebase_core.dart';
 
 FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 final CollectionReference _collectionReferenceUSER =
@@ -28,7 +30,10 @@ class Database {
     }
   }
 
-
+  // static Future<int> fetchCredit({required String userid})async{
+  //   DocumentReference documentReference = _collectionReferenceUSER.doc(userid);
+  //   return (await documentReference.get()).data()["credit_left"] as int;
+  // }
 
 
   static Future<void> addUser(String name, String email, int phoneNumber) async {

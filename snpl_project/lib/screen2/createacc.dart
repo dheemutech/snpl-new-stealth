@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screens/view2.dart';
 import 'package:snpl_project/services/database.dart';
+
+import '../screens3/view2.dart';
 
 class CreateAcc extends StatefulWidget {
   const CreateAcc({Key? key}) : super(key: key);
@@ -11,11 +12,12 @@ class CreateAcc extends StatefulWidget {
   State<CreateAcc> createState() => _CreateAccState();
 }
 
+final _forKey = GlobalKey<FormState>();
+
 class _CreateAccState extends State<CreateAcc> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
 
-  // TODO: Implement either input field or pass from parent
   final phoneController = TextEditingController(text: "9876543210");
 
   bool checkedValue = false;
@@ -23,7 +25,8 @@ class _CreateAccState extends State<CreateAcc> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Form(
+        key: _forKey,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
             height: size.height * 0.03,
@@ -67,6 +70,13 @@ class _CreateAccState extends State<CreateAcc> {
                 child: TextFormField(
                   controller: nameController,
                   keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter name';
+                    } else {
+                      return null;
+                    }
+                  },
                   style: TextStyle(fontSize: 20, color: Colors.black),
                   decoration: InputDecoration(
                       fillColor: Color(0xffffffff),
@@ -109,6 +119,17 @@ class _CreateAccState extends State<CreateAcc> {
                 child: TextFormField(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please enter e-mail address';
+                    } else if (!RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(value)) {
+                      return 'Enter valid Email';
+                    } else {
+                      return null;
+                    }
+                  },
                   style: TextStyle(fontSize: 20, color: Colors.black),
                   decoration: InputDecoration(
                       fillColor: Color(0xffffffff),
@@ -130,91 +151,7 @@ class _CreateAccState extends State<CreateAcc> {
                           color: Color(0xffC9C9C9))),
                 )),
           ),
-          SizedBox(
-            height: size.height * 0.02,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Setup pin',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffffffff),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2.0),
-                      ),
-                      hintText: 'X X X X',
-                      hintStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: Color(0xffC9C9C9))),
-                )),
-          ),
-          SizedBox(
-            height: size.height * 0.02,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Re-enter pin',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffffffff),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2.0),
-                      ),
-                      hintText: 'X X X X',
-                      hintStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: Color(0xffC9C9C9))),
-                )),
-          ),
-          SizedBox(
-            height: size.height * 0.04,
-          ),
+          Spacer(),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 20),
             child: Row(
@@ -237,17 +174,18 @@ class _CreateAccState extends State<CreateAcc> {
             ),
           ),
           SizedBox(
-            height: size.height * 0.06,
+            height: size.height * 0.04,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ElevatedButton(
               onPressed: () async {
-                Database.addUser(nameController.text, emailController.text, int.parse(phoneController.text));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ViewPage2()));
+                if (_forKey.currentState!.validate()) {
+                  Database.addUser(nameController.text, emailController.text,
+                      int.parse(phoneController.text));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ViewPage2()));
+                }
               },
               child: Text(
                 'Start',
@@ -264,10 +202,13 @@ class _CreateAccState extends State<CreateAcc> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.38,
+                    horizontal: size.width * 0.39,
                     vertical: size.height * 0.02),
               ),
             ),
+          ),
+          SizedBox(
+            height: size.height * 0.01,
           ),
         ]),
       ),

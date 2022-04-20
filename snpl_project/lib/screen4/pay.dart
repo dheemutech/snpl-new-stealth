@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screens/loader.dart';
-
-import '../screens/confirmation.dart';
-import '../screens/error.dart';
 import '../services/database.dart';
 import '../services/payment.dart';
+import 'confirmation.dart';
+import 'error.dart';
+import '../screens3/loader.dart';
 
 class PayPage extends StatefulWidget {
   final String vpa;
@@ -128,7 +127,6 @@ class _PayPageState extends State<PayPage> {
                       bool paymentStatus = await isPaymentComplete(id);
 
                       if (paymentStatus) {
-                        // TODO : implement dynamic UserID
                         Database.postTransactions(widget.vpa, int.parse(_controller.text), "userId");
                         Navigator.push(
                           context,
