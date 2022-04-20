@@ -181,7 +181,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     ),
                     primary: Color(0xffffffff),
                     padding: EdgeInsets.symmetric(
-                        horizontal: size.width * 0.32,
+                        horizontal: size.width * 0.315,
                         vertical: size.height * 0.02),
                   ),
                 ),

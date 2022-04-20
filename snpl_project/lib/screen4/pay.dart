@@ -155,7 +155,7 @@ class _PayPageState extends State<PayPage> {
                       elevation: 10,
                       primary: Color(0xff9B4BFF),
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.42,
+                          horizontal: size.width * 0.4,
                           vertical: size.height * 0.02),
                     ),
                   ),

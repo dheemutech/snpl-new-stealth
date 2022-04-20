@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: size.height * 0.02,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding:  EdgeInsets.only(left: 10,top: 30),
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       elevation: 10,
                       primary: Color(0xff9B4BFF),
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.36,
+                          horizontal: size.width * 0.33,
                           vertical: size.height * 0.02),
                     ),
                   ),

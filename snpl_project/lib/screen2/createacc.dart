@@ -26,164 +26,155 @@ class _CreateAccState extends State<CreateAcc> {
     return Scaffold(
       body: Form(
         key: _forKey,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(
-            height: size.height * 0.03,
-          ),
-          IconButton(
-            icon: Icon(Icons.close),
-            iconSize: 40,
-            color: Colors.black,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          SizedBox(
-            height: size.height * 0.02,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            SizedBox(
+              height: size.height * 0.03,
+            ),
+            IconButton(
+              icon: Icon(Icons.close),
+              iconSize: 40,
+              color: Colors.black,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Text(
               "Create your account",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.05,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            Text(
               'First Name',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: TextFormField(
-                  controller: nameController,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter name';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffffffff),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+            Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Container(
+                  alignment: Alignment.centerLeft,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: TextFormField(
+                    controller: nameController,
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter name';
+                      } else {
+                        return null;
+                      }
+                    },
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffffffff),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2.0),
-                      ),
-                      hintText: 'Name',
-                      hintStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: Color(0xffC9C9C9))),
-                )),
-          ),
-          SizedBox(
-            height: size.height * 0.02,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2.0),
+                        ),
+                        hintText: 'Name',
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Color(0xffC9C9C9))),
+                  )),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Text(
               'Email',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Please enter e-mail address';
-                    } else if (!RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value)) {
-                      return 'Enter valid Email';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: TextStyle(fontSize: 20, color: Colors.black),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffffffff),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+            Padding(
+              padding: EdgeInsets.only(right: 20),
+              child: Container(
+                  alignment: Alignment.centerLeft,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please enter e-mail address';
+                      } else if (!RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value)) {
+                        return 'Enter valid Email';
+                      } else {
+                        return null;
+                      }
+                    },
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffffffff),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2.0),
-                      ),
-                      hintText: 'E-mail',
-                      hintStyle: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: Color(0xffC9C9C9))),
-                )),
-          ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 20),
-            child: Row(
-              children: [
-                Checkbox(
-                  value: checkedValue,
-                  onChanged: (checkedValue) {
-                    setState(() {
-                      this.checkedValue = checkedValue!;
-                    });
-                  },
-                ),
-                Expanded(
-                  child: Text(
-                    'I certify that I am 18 years of age or older, and I agree to the User Agreement and Privacy Policy',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ],
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2.0),
+                        ),
+                        hintText: 'E-mail',
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                            color: Color(0xffC9C9C9))),
+                  )),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.04,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: ElevatedButton(
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: checkedValue,
+                    onChanged: (checkedValue) {
+                      setState(() {
+                        this.checkedValue = checkedValue!;
+                      });
+                    },
+                  ),
+                  Expanded(
+                    child: Text(
+                      'I certify that I am 18 years of age or older, and I agree to the User Agreement and Privacy Policy',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.04,
+            ),
+            ElevatedButton(
               onPressed: () async {
-                Database.addUser(nameController.text, emailController.text, int.parse(widget.phoneNumber));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ViewPage2()));
+                Database.addUser(nameController.text, emailController.text,
+                    int.parse(widget.phoneNumber));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ViewPage2()));
               },
               child: Text(
                 'Submit',
@@ -200,15 +191,15 @@ class _CreateAccState extends State<CreateAcc> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.39,
+                    horizontal: size.width * 0.33,
                     vertical: size.height * 0.02),
               ),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.01,
-          ),
-        ]),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+          ]),
+        ),
       ),
     );
   }

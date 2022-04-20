@@ -237,7 +237,7 @@ class _ViewPageState extends State<ViewPage> {
                   elevation: 10,
                   primary: Color(0xff9B4BFF),
                   padding: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.36,
+                      horizontal: size.width * 0.33,
                       vertical: size.height * 0.02),
                 ),
               ),

@@ -72,10 +72,8 @@ class _ViewPage2State extends State<ViewPage2> {
             padding: const EdgeInsets.only(left: 10),
             child: ElevatedButton(
               onPressed: () async {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => IDProof()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => IDProof()));
               },
               child: Text(
                 'Continue',
@@ -92,7 +90,7 @@ class _ViewPage2State extends State<ViewPage2> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.37,
+                    horizontal: size.width * 0.33,
                     vertical: size.height * 0.02),
               ),
             ),

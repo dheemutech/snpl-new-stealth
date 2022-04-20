@@ -18,7 +18,6 @@ class _FirstPgState extends State<FirstPg> {
     return Scaffold(
       backgroundColor: Color(0xff2752E7),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
@@ -37,33 +36,30 @@ class _FirstPgState extends State<FirstPg> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.4,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginScreen(phoneController)));
-              },
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  color: Color(0xff000000),
-                  fontWeight: FontWeight.w800,
-                  fontSize: 30,
-                ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LoginScreen(phoneController)));
+            },
+            child: Text(
+              'Login',
+              style: TextStyle(
+                color: Color(0xff000000),
+                fontWeight: FontWeight.w800,
+                fontSize: 30,
               ),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                elevation: 10,
-                primary: Colors.white,
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.37,
-                    vertical: MediaQuery.of(context).size.height * 0.02),
+            ),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
+              elevation: 10,
+              primary: Colors.white,
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.33,
+                  vertical: MediaQuery.of(context).size.height * 0.02),
             ),
           ),
         ],

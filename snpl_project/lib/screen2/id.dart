@@ -47,7 +47,7 @@ class _IDProofState extends State<IDProof> {
             height: size.height * 0.05,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 22),
+            padding: EdgeInsets.only(left: 20),
             child: Text(
               "ID number (Adhaar Number)",
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
@@ -97,7 +97,7 @@ class _IDProofState extends State<IDProof> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.39,
+                    horizontal: size.width * 0.33,
                     vertical: size.height * 0.02),
               ),
             ),
