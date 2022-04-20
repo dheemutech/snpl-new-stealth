@@ -69,3 +69,18 @@ Future<bool> isPaymentComplete(String id) async {
   if (status == 'processed') return true;
   return false;
 }
+
+Future<String> getPayeeName(String vpa) async {
+  final res = await http.post(
+    Uri.parse('https://api.razorpay.com/v1/payments/validate/vpa'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: basicAuth,
+    },
+    body: jsonEncode(<String, Object>{"vpa": vpa}),
+  );
+
+  dynamic body = jsonDecode(res.body);
+  if (body['customer_name'] == null) return vpa;
+  return body['customer_name'];
+}
