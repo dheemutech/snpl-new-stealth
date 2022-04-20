@@ -35,7 +35,7 @@ class _FirstPgState extends State<FirstPg> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.42,
+            height: MediaQuery.of(context).size.height * 0.4,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
