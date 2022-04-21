@@ -36,38 +36,36 @@ class _HomePageState extends State<HomePage> {
                   width: size.width,
                   height: 200,
                   color: Color(0xff6E5454),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: size.height * 0.04,
-                        ),
-                        Text(
-                          'You have a credit limit of',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.currency_rupee,
-                              color: Colors.white,
-                              size: 38,
-                            ),
-                            Text('500',
-                                style: TextStyle(
-                                    fontSize: 40,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: size.height * 0.08,
+                      ),
+                      Text(
+                        'You have a credit limit of',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.currency_rupee,
+                            color: Colors.white,
+                            size: 38,
+                          ),
+                          Text('500',
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
