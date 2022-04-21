@@ -8,8 +8,7 @@ import 'package:snpl_project/screen1/otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen(this.phoneController, {Key? key}) : super(key: key);
-  final TextEditingController phoneController;
+  const LoginScreen({Key? key}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }

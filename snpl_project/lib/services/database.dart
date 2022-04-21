@@ -44,9 +44,23 @@ class Database {
         "email": email,
         "phone_number": phoneNumber,
         // "aadhar_number": aadharNumber,
-        "credit_left": 500, // default credit
+        "credit_left": 1000, // default credit
       };
       await documentReference.set(data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<void> deductCredit(String userId, int amount) async {
+    try {
+      var docSnapshot = await _collectionReferenceUSER.doc(userId).get();
+      if (docSnapshot.exists) {
+       Map<String, dynamic> data = docSnapshot.data()! as Map<String, dynamic>;
+
+        var prevCredit = data['credit_left'];
+       _collectionReferenceUSER.doc(userId).update({'credit_left': prevCredit-amount});
+      }
     } catch (e) {
       print(e);
     }
