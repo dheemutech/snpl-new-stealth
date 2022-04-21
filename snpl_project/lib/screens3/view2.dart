@@ -16,6 +16,7 @@ class _ViewPage2State extends State<ViewPage2> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Color(0xff271D5F),
       body: SingleChildScrollView(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +27,7 @@ class _ViewPage2State extends State<ViewPage2> {
           IconButton(
             icon: Icon(Icons.close),
             iconSize: 40,
-            color: Colors.black,
+            color: Color(0xffFF9838),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -43,7 +44,8 @@ class _ViewPage2State extends State<ViewPage2> {
           Center(
               child: Text(
             'Verify your adhaar No',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white),
           )),
           SizedBox(
             height: size.height * 0.02,
@@ -52,7 +54,7 @@ class _ViewPage2State extends State<ViewPage2> {
             padding: const EdgeInsets.only(left: 20, right: 10),
             child: Text(
               'Financial regulations require us to verify your ID. This helps prevent someone else from creating a account in your name',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.white60),
             ),
           ),
           SizedBox(
@@ -62,7 +64,7 @@ class _ViewPage2State extends State<ViewPage2> {
             padding: const EdgeInsets.only(left: 20, right: 10),
             child: Text(
               'After this step, you’ll be ready to scan and pay',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.white60),
             ),
           ),
           SizedBox(
@@ -78,7 +80,7 @@ class _ViewPage2State extends State<ViewPage2> {
               child: Text(
                 'Continue',
                 style: TextStyle(
-                  color: Color(0xffffffff),
+                  color: Color(0xff2C4D8D),
                   fontWeight: FontWeight.w800,
                   fontSize: 25,
                 ),
@@ -88,7 +90,7 @@ class _ViewPage2State extends State<ViewPage2> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 elevation: 10,
-                primary: Color(0xff9B4BFF),
+                primary: Color(0xff38C1FF),
                 padding: EdgeInsets.symmetric(
                     horizontal: size.width * 0.34,
                     vertical: size.height * 0.02),

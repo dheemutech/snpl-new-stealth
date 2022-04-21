@@ -17,7 +17,7 @@ class _ViewPageState extends State<ViewPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff271D5F),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,7 +27,7 @@ class _ViewPageState extends State<ViewPage> {
           IconButton(
             icon: Icon(Icons.close),
             iconSize: 40,
-            color: Colors.black,
+            color: Color(0xffFF9838),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -42,7 +42,10 @@ class _ViewPageState extends State<ViewPage> {
             padding: EdgeInsets.only(left: 20),
             child: Text(
               "Let's secure your account",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.white),
             ),
           ),
           SizedBox(
@@ -60,7 +63,7 @@ class _ViewPageState extends State<ViewPage> {
                       height: 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color(0xffF3F3F3),
+                        color: Color(0xffFF9838),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +72,7 @@ class _ViewPageState extends State<ViewPage> {
                           Text(
                             '1',
                             style: TextStyle(
-                                color: Color(0xff707070), fontSize: 22),
+                                color: Color(0xffffffff), fontSize: 22),
                           ),
                         ],
                       ),
@@ -79,14 +82,18 @@ class _ViewPageState extends State<ViewPage> {
                     ),
                     Text(
                       'Create your account',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
                     ),
                     Spacer(),
                     Text(
                       '2 min',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white60),
                     )
                   ],
                 ),
@@ -108,7 +115,7 @@ class _ViewPageState extends State<ViewPage> {
                       height: 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color(0xffF3F3F3),
+                        color: Color(0xffFF9838),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,7 +124,7 @@ class _ViewPageState extends State<ViewPage> {
                           Text(
                             '2',
                             style: TextStyle(
-                                color: Color(0xff707070), fontSize: 22),
+                                color: Color(0xffffffff), fontSize: 22),
                           ),
                         ],
                       ),
@@ -130,22 +137,26 @@ class _ViewPageState extends State<ViewPage> {
                         Text(
                           'Upload adhaar details',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w700),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white),
                         ),
                         Text(
                           '2-step verification',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
-                              color: Colors.black54),
+                              color: Colors.white70),
                         ),
                       ],
                     ),
                     Spacer(),
                     Text(
                       '1 min',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white60),
                     )
                   ],
                 ),
@@ -154,7 +165,7 @@ class _ViewPageState extends State<ViewPage> {
           ),
           Spacer(),
           Padding(
-            padding: const EdgeInsets.only(left: 20,bottom: 20),
+            padding: const EdgeInsets.only(left: 20, bottom: 20),
             child: ElevatedButton(
               onPressed: () async {
                 Navigator.push(
@@ -165,7 +176,7 @@ class _ViewPageState extends State<ViewPage> {
               child: Text(
                 'Start',
                 style: TextStyle(
-                  color: Color(0xffffffff),
+                  color: Color(0xff2C4D8D),
                   fontWeight: FontWeight.w800,
                   fontSize: 25,
                 ),
@@ -175,7 +186,7 @@ class _ViewPageState extends State<ViewPage> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 elevation: 10,
-                primary: Color(0xff9B4BFF),
+                primary: Color(0xff38C1FF),
                 padding: EdgeInsets.symmetric(
                     horizontal: size.width * 0.39,
                     vertical: size.height * 0.02),

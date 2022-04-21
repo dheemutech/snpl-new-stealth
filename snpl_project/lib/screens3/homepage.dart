@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Color(0xff271D5F),
             body: Column(
               children: [
                 Container(

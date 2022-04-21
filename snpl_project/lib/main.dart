@@ -7,7 +7,7 @@ import 'package:snpl_project/screen1/login.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  
+
   runApp(MyApp());
 }
 

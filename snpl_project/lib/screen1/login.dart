@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: Color(0xff271D5F),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -37,24 +37,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                // IconButton(
-                //   icon: Icon(Icons.close),
-                //   iconSize: 40,
-                //   color: Colors.black,
-                //   onPressed: () {
-                //     Navigator.pop(context);
-                //   },
-                // ),
                 SizedBox(
                   height: size.height * 0.05,
                 ),
-                Text(
-                  'Enter your mobile number',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
+                Text('Enter your mobile number',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.white)),
                 Text(
                   'to get started',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white),
                 ),
                 SizedBox(
                   height: size.height * 0.05,
@@ -63,19 +59,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       'you will recieve a ',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                          color: Colors.white70),
                     ),
                     Text(
                       'One Time Password',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Colors.white70),
                     )
                   ],
                 ),
                 Text(
                   'to this number',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      color: Colors.white70),
                 ),
                 SizedBox(
                   height: size.height * 0.05,
@@ -83,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   'Phone Number',
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
@@ -94,8 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       controller: phoneController,
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                       maxLength: 10,
+                      cursorColor: Color(0xffFF9838),
                       validator: (value) {
                         if (value == null) {
                           return 'Please enter phone number';
@@ -107,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       },
                       decoration: InputDecoration(
-                          fillColor: Color(0xffffffff),
+                          fillColor: Color(0xff3D346F),
                           filled: true,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -117,12 +121,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             borderSide: const BorderSide(
-                                color: Colors.black, width: 2.0),
+                                color: Colors.white54, width: 2.0),
                           ),
                           hintText: 'Phone No.',
                           prefixIcon: Icon(
                             Icons.call,
-                            color: Color(0xff000000),
+                            color: Color(0xffFF9838),
                           ),
                           hintStyle: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -130,10 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Color(0xffC9C9C9))),
                     )),
                 SizedBox(
-                  height: size.height * 0.02,
+                  height: size.height * 0.4,
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(left: 10,top: 30),
+                  padding: EdgeInsets.only(left: 10, top: 30),
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -145,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       'Sign In',
                       style: TextStyle(
-                        color: Color(0xffffffff),
+                        color: Color(0xff2C4D8D),
                         fontWeight: FontWeight.w800,
                         fontSize: 25,
                       ),
@@ -155,9 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       elevation: 10,
-                      primary: Color(0xff9B4BFF),
+                      primary: Color(0xff38C1FF),
                       padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.33,
+                          horizontal: size.width * 0.34,
                           vertical: size.height * 0.02),
                     ),
                   ),
