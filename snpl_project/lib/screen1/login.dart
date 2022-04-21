@@ -37,14 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                IconButton(
-                  icon: Icon(Icons.close),
-                  iconSize: 40,
-                  color: Colors.black,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                // IconButton(
+                //   icon: Icon(Icons.close),
+                //   iconSize: 40,
+                //   color: Colors.black,
+                //   onPressed: () {
+                //     Navigator.pop(context);
+                //   },
+                // ),
                 SizedBox(
                   height: size.height * 0.05,
                 ),

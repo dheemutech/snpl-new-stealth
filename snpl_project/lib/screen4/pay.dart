@@ -65,7 +65,7 @@ class _PayPageState extends State<PayPage> {
                     fontWeight: FontWeight.w500)),
             SizedBox(height: size.height * 0.2),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding:  EdgeInsets.symmetric(horizontal: 20),
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 30),
                 width: size.width,
