@@ -80,7 +80,6 @@ class _IDProofState extends State<IDProof> {
               onPressed: () async {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomePage()));
-              //}
               },
               child: Text(
                 'Start',
@@ -97,7 +96,7 @@ class _IDProofState extends State<IDProof> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.33,
+                    horizontal: size.width * 0.38,
                     vertical: size.height * 0.02),
               ),
             ),

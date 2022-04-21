@@ -27,7 +27,7 @@ class _CreateAccState extends State<CreateAcc> {
       body: Form(
         key: _forKey,
         child: Padding(
-          padding: const EdgeInsets.only(left: 20),
+          padding:  EdgeInsets.only(left: 20),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
@@ -191,7 +191,7 @@ class _CreateAccState extends State<CreateAcc> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.33,
+                    horizontal: size.width * 0.36,
                     vertical: size.height * 0.02),
               ),
             ),

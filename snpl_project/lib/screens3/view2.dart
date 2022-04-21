@@ -42,7 +42,7 @@ class _ViewPage2State extends State<ViewPage2> {
           ),
           Center(
               child: Text(
-            'Verify your photo ID',
+            'Verify your adhaar No',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           )),
           SizedBox(
@@ -69,7 +69,7 @@ class _ViewPage2State extends State<ViewPage2> {
             height: size.height * 0.25,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 20),
             child: ElevatedButton(
               onPressed: () async {
                 Navigator.push(context,
@@ -90,7 +90,7 @@ class _ViewPage2State extends State<ViewPage2> {
                 elevation: 10,
                 primary: Color(0xff9B4BFF),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.33,
+                    horizontal: size.width * 0.34,
                     vertical: size.height * 0.02),
               ),
             ),

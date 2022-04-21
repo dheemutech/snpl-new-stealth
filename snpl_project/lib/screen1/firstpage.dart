@@ -16,7 +16,7 @@ class _FirstPgState extends State<FirstPg> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff2752E7),
+      backgroundColor: Color(0xff4059ad),
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

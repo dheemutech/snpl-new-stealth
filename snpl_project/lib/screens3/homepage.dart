@@ -30,161 +30,143 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
         child: Scaffold(
             backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: size.width,
-                    height: 200,
-                    color: Color(0xff6E5454),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: size.height * 0.04,
-                          ),
-                          Text(
-                            'Hi User',
-                            style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            'you have a credit limit of',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.currency_rupee,
-                                color: Colors.white,
-                                size: 38,
-                              ),
-                              Text('500',
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Center(
-                    child: Text(
-                      "Welcome to SNPL!",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.05,
-                  ),
-                  ElevatedButton(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
+            body: Column(
+              children: [
+                Container(
+                  width: size.width,
+                  height: 200,
+                  color: Color(0xff6E5454),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.qr_code_scanner, size: 35),
                         SizedBox(
-                          width: 5,
+                          height: size.height * 0.04,
                         ),
                         Text(
-                          'Scan and Pay',
-                          style: TextStyle(fontSize: 25),
+                          'You have a credit limit of',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.currency_rupee,
+                              color: Colors.white,
+                              size: 38,
+                            ),
+                            Text('500',
+                                style: TextStyle(
+                                    fontSize: 40,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
+                          ],
                         ),
                       ],
                     ),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return _buildQrView(context);
-                      }));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35.0),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+                ElevatedButton(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.qr_code_scanner, size: 35),
+                      SizedBox(
+                        width: 5,
                       ),
-                      elevation: 10,
-                      primary: Color(0xff9B4BFF),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.1,
-                          vertical: size.height * 0.02),
-                    ),
+                      Text(
+                        'Scan and Pay',
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                          height: size.height*0.05,
-                        ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection('TRANSACTION')
-                          .snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          return Column(
-                            children: [
-                              Center(
-                                child: Text(
-                                  'Recent Transactions',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return _buildQrView(context);
+                    }));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(35.0),
+                    ),
+                    elevation: 10,
+                    primary: Color(0xff9B4BFF),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: size.width * 0.1,
+                        vertical: size.height * 0.02),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.05,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('TRANSACTION')
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                'Recent Transactions',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: snapshot.data!.docs.map((document) {
-                                    return Column(
-                                      children: [
-                                        Row(children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(vertical: 20),
-                                            child: Text(
-                                              document['vpa'],
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          Text(
-                                            document['payment'].toString(),
-                                            style: TextStyle(
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ]),
-                                      ],
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ],
-                          );
-                        }
-                      },
-                    ),
+                            ),
+                            ListView(
+                              padding: EdgeInsets.all(10),
+                              shrinkWrap: true,
+                              children: snapshot.data!.docs.map((document) {
+                                return Column(
+                                  children: [
+                                    Row(children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        child: Text(
+                                          document['vpa'],
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        document['payment'].toString(),
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ]),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        );
+                      }
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             )));
   }
 
