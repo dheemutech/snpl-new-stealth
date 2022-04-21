@@ -51,13 +51,13 @@ class _OTPScreenState extends State<OTPScreen> {
                 height: size.height * 0.05,
               ),
               Text(
-                'Enter the 6-digit code we texted to',
+                'Enter the 4-digit pin',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
-              Text(
-                ' +91 ${widget.phone}',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
+              // Text(
+              //   ' +91 ${widget.phone}',
+              //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              // ),
               SizedBox(
                 height: size.height * 0.05,
               ),
@@ -99,7 +99,8 @@ class _OTPScreenState extends State<OTPScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ViewPage(widget.phone)));
+                                  builder: (context) =>
+                                      ViewPage(widget.phone)));
                         }
                       });
                     },
@@ -116,7 +117,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           borderSide:
                               const BorderSide(color: Colors.black, width: 2.0),
                         ),
-                        hintText: '6-digit OTP',
+                        hintText: '4-digit Pin',
                         hintStyle: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
@@ -134,12 +135,14 @@ class _OTPScreenState extends State<OTPScreen> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              content: Text('Invalid OTP'),
+                              content: Text('Invalid PIN'),
                             );
                           });
                     } else {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ViewPage(widget.phone)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewPage(widget.phone)));
                     }
                   },
                   child: Text(
@@ -161,30 +164,30 @@ class _OTPScreenState extends State<OTPScreen> {
                         vertical: size.height * 0.02),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'I need help',
-                    style: TextStyle(
-                      color: Color(0xff000000),
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    primary: Color(0xffffffff),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: size.width * 0.315,
-                        vertical: size.height * 0.02),
-                  ),
-                ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 10),
+                //   child: ElevatedButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       'I need help',
+                //       style: TextStyle(
+                //         color: Color(0xff000000),
+                //         fontWeight: FontWeight.w800,
+                //         fontSize: 25,
+                //       ),
+                //     ),
+                //     style: ElevatedButton.styleFrom(
+                //       shape: RoundedRectangleBorder(
+                //         side: BorderSide(color: Colors.black),
+                //         borderRadius: BorderRadius.circular(10.0),
+                //       ),
+                //       primary: Color(0xffffffff),
+                //       padding: EdgeInsets.symmetric(
+                //           horizontal: size.width * 0.315,
+                //           vertical: size.height * 0.02),
+                //     ),
+                //   ),
               ),
             ],
           ),

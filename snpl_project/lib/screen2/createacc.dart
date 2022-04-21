@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screen2/id.dart';
+import 'package:snpl_project/screens/view.dart';
 import 'package:snpl_project/screens3/homepage.dart';
+import 'package:snpl_project/screens3/view2.dart';
 import 'package:snpl_project/services/database.dart';
 
 class CreateAcc extends StatefulWidget {
@@ -15,10 +19,17 @@ class CreateAcc extends StatefulWidget {
 final _forKey = GlobalKey<FormState>();
 
 class _CreateAccState extends State<CreateAcc> {
+  String? enteredOTP = '';
   final nameController = TextEditingController();
+  final pinController = TextEditingController();
+  final pInController = TextEditingController();
   final emailController = TextEditingController();
 
+  final _auth = FirebaseAuth.instance;
+
   bool checkedValue = false;
+
+  String verificationIDRecieved = '';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,7 +37,7 @@ class _CreateAccState extends State<CreateAcc> {
       body: Form(
         key: _forKey,
         child: Padding(
-          padding:  EdgeInsets.only(left: 20),
+          padding: EdgeInsets.only(left: 20),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(
@@ -143,6 +154,111 @@ class _CreateAccState extends State<CreateAcc> {
                             color: Color(0xffC9C9C9))),
                   )),
             ),
+            Text(
+              '',
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+            ),
+            SizedBox(
+              height: size.height * 0.05,
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: TextField(
+                  controller: pinController,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  maxLength: 4,
+                  onChanged: (pin) {
+                    enteredOTP = pin;
+                  },
+                  onSubmitted: (enteredOTP) async {
+                    await _auth
+                        .signInWithCredential(PhoneAuthProvider.credential(
+                            verificationId: verificationIDRecieved,
+                            smsCode: enteredOTP))
+                        .then((value) async {
+                      if (value.user != null) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                            (route) => false);
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewPage2()));
+                      }
+                    });
+                  },
+                  decoration: InputDecoration(
+                      fillColor: Color(0xffffffff),
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                      hintText: '4-digit Pin',
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Color(0xffC9C9C9))),
+                )),
+            Container(
+                alignment: Alignment.centerLeft,
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: TextField(
+                  controller: pInController,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  maxLength: 4,
+                  onChanged: (pin) {
+                    enteredOTP = pin;
+                  },
+                  onSubmitted: (enteredOTP) async {
+                    await _auth
+                        .signInWithCredential(PhoneAuthProvider.credential(
+                            verificationId: verificationIDRecieved,
+                            smsCode: enteredOTP))
+                        .then((value) async {
+                      if (value.user != null) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                            (route) => false);
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewPage2()));
+                      }
+                    });
+                  },
+                  decoration: InputDecoration(
+                      fillColor: Color(0xffffffff),
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                      hintText: '4-digit Pin',
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Color(0xffC9C9C9))),
+                )),
             Spacer(),
             Padding(
               padding: const EdgeInsets.only(right: 20),
@@ -170,11 +286,10 @@ class _CreateAccState extends State<CreateAcc> {
             ),
             ElevatedButton(
               onPressed: () async {
-                Database.addUser(nameController.text, emailController.text, int.parse(widget.phoneNumber));
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage()));
+                Database.addUser(nameController.text, emailController.text,
+                    int.parse(widget.phoneNumber));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               },
               child: Text(
                 'Submit',
