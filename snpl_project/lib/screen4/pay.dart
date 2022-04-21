@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screen1/login.dart';
 import '../services/database.dart';
 import '../services/payment.dart';
 import 'confirmation.dart';
@@ -29,6 +30,7 @@ class _PayPageState extends State<PayPage> {
 
   void setPayeeName() async {
     payeeName = await getPayeeName(widget.vpa);
+    setState(() { });
   }
 
   @override
@@ -40,6 +42,12 @@ class _PayPageState extends State<PayPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    if (!Database.userCheck()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    }
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       body: SingleChildScrollView(
@@ -117,6 +125,12 @@ class _PayPageState extends State<PayPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      if (int.parse(await Database.fetchCredit()) < int.parse(_controller.text)) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ErrorPage()),
+                        );
+                      }
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Loader()),
@@ -133,8 +147,11 @@ class _PayPageState extends State<PayPage> {
                       bool paymentStatus = await isPaymentComplete(id);
 
                       if (paymentStatus) {
-                        Database.postTransactions(widget.vpa, int.parse(_controller.text), "15A8EsUg3atjcs4v6jBl");
-                        Database.deductCredit("15A8EsUg3atjcs4v6jBl", int.parse(_controller.text));
+                        await Database.postTransactions(
+                          widget.vpa,
+                          int.parse(_controller.text),
+                        );
+                        await Database.deductCredit(int.parse(_controller.text));
                         Navigator.push(
                           context,
                           MaterialPageRoute(

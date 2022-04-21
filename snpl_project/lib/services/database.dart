@@ -10,19 +10,37 @@ final CollectionReference _collectionReferenceTRANSACTION =
     _firebaseFirestore.collection("TRANSACTION");
 
 class Database {
+  // ignore: prefer_typing_uninitialized_variables
+  static var currentUser;
+
+  static bool userCheck() {
+    return Database.currentUser != null;
+  }
+
+  static Future<bool> userExists(int phoneNumber) async {
+    var docSnapshot = await _collectionReferenceUSER
+        .where('phone_number', isEqualTo: phoneNumber)
+        .get();
+    if (docSnapshot.docs.isEmpty) return false;
+
+    Database.currentUser = docSnapshot.docs[0];
+    return true;
+  }
+
   static Stream<QuerySnapshot> readTransactions() {
     CollectionReference transactionCollection =
         _collectionReferenceTRANSACTION.doc().collection("TRANSACTIONS");
     return transactionCollection.snapshots();
   }
 
-  static Future<void> postTransactions(String vpa, int payment, String userId) async {
+  static Future<void> postTransactions(String vpa, int payment) async {
     try {
-      DocumentReference documentReference = _collectionReferenceTRANSACTION.doc();
+      DocumentReference documentReference =
+          _collectionReferenceTRANSACTION.doc();
       Map<String, dynamic> data = <String, dynamic>{
         "vpa": vpa,
         "payment": payment,
-        "user_id": userId,
+        "user_id": Database.currentUser.id,
       };
       await documentReference.set(data);
     } catch (e) {
@@ -30,15 +48,20 @@ class Database {
     }
   }
 
-  // static Future<int> fetchCredit({required String userid})async{
-  //   DocumentReference documentReference = _collectionReferenceUSER.doc(userid);
-  //   return (await documentReference.get()).data()["credit_left"] as int;
-  // }
+  static Future<String> fetchCredit() async {
+    var docSnapshot =
+        await _collectionReferenceUSER.doc(Database.currentUser.id).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()! as Map<String, dynamic>;
+      print(data["credit_left"]);
+      return data["credit_left"].toString();
+    }
+    return "0";
+  }
 
-
-  static Future<void> addUser(String name, String email, int phoneNumber) async {
+  static Future<void> addUser(
+      String name, String email, int phoneNumber) async {
     try {
-      DocumentReference documentReference = _collectionReferenceUSER.doc();
       Map<String, dynamic> data = <String, dynamic>{
         "name": name,
         "email": email,
@@ -46,20 +69,24 @@ class Database {
         // "aadhar_number": aadharNumber,
         "credit_left": 1000, // default credit
       };
-      await documentReference.set(data);
+
+      Database.currentUser = await _collectionReferenceUSER.add(data);
     } catch (e) {
       print(e);
     }
   }
 
-  static Future<void> deductCredit(String userId, int amount) async {
+  static Future<void> deductCredit(int amount) async {
     try {
-      var docSnapshot = await _collectionReferenceUSER.doc(userId).get();
+      var docSnapshot =
+          await _collectionReferenceUSER.doc(Database.currentUser.id).get();
       if (docSnapshot.exists) {
-       Map<String, dynamic> data = docSnapshot.data()! as Map<String, dynamic>;
+        Map<String, dynamic> data = docSnapshot.data()! as Map<String, dynamic>;
 
         var prevCredit = data['credit_left'];
-       _collectionReferenceUSER.doc(userId).update({'credit_left': prevCredit-amount});
+        _collectionReferenceUSER
+            .doc(Database.currentUser.id)
+            .update({'credit_left': prevCredit - amount});
       }
     } catch (e) {
       print(e);

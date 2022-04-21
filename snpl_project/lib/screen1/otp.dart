@@ -2,19 +2,21 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../screens/view.dart';
+import 'package:snpl_project/screen2/createacc.dart';
 import '../screens3/homepage.dart';
+import '../services/database.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
-  const OTPScreen(this.phone);
+  final bool existingUser;
+  const OTPScreen(this.phone, this.existingUser);
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
-  String? enteredOTP = '';
+  String enteredOTP = '';
   final _controller = TextEditingController();
   final _auth = FirebaseAuth.instance;
   @override
@@ -84,12 +86,14 @@ class _OTPScreenState extends State<OTPScreen> {
                       enteredOTP = pin;
                     },
                     onSubmitted: (enteredOTP) async {
+                      print('==========================');
+
                       await _auth
                           .signInWithCredential(PhoneAuthProvider.credential(
                               verificationId: verificationIDRecieved,
                               smsCode: enteredOTP))
                           .then((value) async {
-                        if (value.user != null) {
+                        if (value.user != null || widget.existingUser) {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -99,7 +103,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ViewPage(widget.phone)));
+                                  builder: (context) => CreateAcc(widget.phone)));
                         }
                       });
                     },
@@ -129,7 +133,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (enteredOTP!.length < 6) {
+                    if (enteredOTP.length < 6) {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -138,8 +142,27 @@ class _OTPScreenState extends State<OTPScreen> {
                             );
                           });
                     } else {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ViewPage(widget.phone)));
+                      
+                      await _auth
+                          .signInWithCredential(PhoneAuthProvider.credential(
+                              verificationId: verificationIDRecieved,
+                              smsCode: enteredOTP))
+                          .then((value) async {
+                        if (value.user != null || widget.existingUser) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreateAcc(widget.phone)));
+                        }
+                      });
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => CreateAcc(widget.phone)));
                     }
                   },
                   child: Text(

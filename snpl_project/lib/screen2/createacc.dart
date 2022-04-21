@@ -170,7 +170,7 @@ class _CreateAccState extends State<CreateAcc> {
             ),
             ElevatedButton(
               onPressed: () async {
-                Database.addUser(nameController.text, emailController.text, int.parse(widget.phoneNumber));
+                await Database.addUser(nameController.text, emailController.text, int.parse(widget.phoneNumber));
                 Navigator.push(
                     context,
                     MaterialPageRoute(

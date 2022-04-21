@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:snpl_project/screen1/login.dart';
+import 'package:snpl_project/services/database.dart';
 
 import '../screen4/pay.dart';
 
@@ -16,17 +18,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Barcode? result;
   QRViewController? controller;
+  String creditLeft = "";
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   String qrcode = ' ';
   @override
   void initState() {
     super.initState();
+    if (!Database.userCheck()) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) {
+        return _buildQrView(context);
+      }));
+    }
+    setCreditLeft();
+  }
+
+  void setCreditLeft() async {
+    creditLeft = await Database.fetchCredit();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    if (!Database.userCheck()) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) {
+        return LoginScreen();
+      }));
+    }
     return SafeArea(
         child: Scaffold(
             backgroundColor: Colors.white,
@@ -53,10 +72,38 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.currency_rupee,
-                            color: Colors.white,
-                            size: 38,
+                          SizedBox(
+                            height: size.height * 0.04,
+                          ),
+                          Text(
+                            'Hi User',
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            'you have a credit limit of',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.currency_rupee,
+                                color: Colors.white,
+                                size: 38,
+                              ),
+                              Text(creditLeft,
+                                  style: TextStyle(
+                                      fontSize: 40,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                            ],
                           ),
                           Text('500',
                               style: TextStyle(
@@ -109,6 +156,7 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('TRANSACTION')
+                        .where('user_id', isEqualTo: Database.currentUser.id)
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
