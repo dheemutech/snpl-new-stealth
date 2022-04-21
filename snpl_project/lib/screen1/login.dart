@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screen1/otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:snpl_project/screens3/homepage.dart';
+import '../services/database.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -23,6 +25,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    if (Database.userCheck()) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomePage()));
+    }
     return SafeArea(
         child: Scaffold(
       backgroundColor: Color(0xff271D5F),
@@ -139,11 +145,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 10, top: 30),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        bool existingUser = await Database.userExists(
+                            int.parse(phoneController.text));
+
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
-                                OTPScreen(phoneController.text)));
+                                OTPScreen(phoneController.text, existingUser)));
                       }
                     },
                     child: Text(
