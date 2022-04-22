@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (_formKey.currentState!.validate()) {
                         bool existingUser = await Database.userExists(
                             int.parse(phoneController.text));
-
+                      
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
                                 OTPScreen(phoneController.text, existingUser)));

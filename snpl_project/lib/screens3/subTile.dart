@@ -19,7 +19,7 @@ class subtile extends StatelessWidget {
       child: Center(
         child: Text(
           subTitleText,
-          style: TextStyle(fontSize: 22, color: Colors.black,fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 22, color: Colors.white60,fontWeight: FontWeight.w600),
         ),
       ),
     );

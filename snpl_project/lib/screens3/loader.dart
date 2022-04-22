@@ -9,17 +9,16 @@ class Loader extends StatefulWidget {
   State<Loader> createState() => _LoaderState();
 }
 
-
 class _LoaderState extends State<Loader> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff271D5F),
       body: Center(
         child: SpinKitPouringHourGlass(
-          size: 60,
+          size: 80,
           duration: Duration(seconds: 5),
-          color: Colors.black,
+          color: Color(0xffFF9838),
         ),
       ),
     );

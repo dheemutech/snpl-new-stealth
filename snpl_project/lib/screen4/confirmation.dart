@@ -35,7 +35,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text('Successfull',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.white)),
             ),
             subtile(subTitleText: 'Your Paymaent was Done Successfully'),
             // Padding(
@@ -102,7 +102,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
             // ),
             Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: ElevatedButton(
                 onPressed: () async {
                   Navigator.push(context,
@@ -111,7 +111,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                 child: Text(
                   'Ok',
                   style: TextStyle(
-                    color: Color(0xffffffff),
+                    color: Color(0xff2C4D8D),
                     fontWeight: FontWeight.w800,
                     fontSize: 25,
                   ),
@@ -121,7 +121,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   elevation: 10,
-                  primary: Color(0xff9B4BFF),
+                  primary: Color(0xff38C1FF),
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width * 0.4,
                       vertical: MediaQuery.of(context).size.height * 0.02),

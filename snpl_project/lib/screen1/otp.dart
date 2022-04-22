@@ -3,7 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screen2/createacc.dart';
-import '../screens/view.dart';
 import '../screens3/homepage.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -115,7 +114,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          ViewPage(widget.phone)));
+                                          CreateAcc(widget.phone)));
                             }
                           });
                         },
