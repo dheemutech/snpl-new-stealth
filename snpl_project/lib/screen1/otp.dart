@@ -7,8 +7,7 @@ import '../screens3/homepage.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
-  final bool existingUser;
-  const OTPScreen(this.phone, this.existingUser);
+  const OTPScreen(this.phone);
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -36,28 +35,30 @@ class _OTPScreenState extends State<OTPScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-                height: size.height * 0.01,
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                iconSize: 40,
-                            color: Color(0xffFF9838),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+              height: size.height * 0.01,
+            ),
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              iconSize: 40,
+              color: Color(0xffFF9838),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             Padding(
               padding: EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   SizedBox(
                     height: size.height * 0.02,
                   ),
                   Text(
                     'Enter the 4-digit Pin',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28,color:Colors.white),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        color: Colors.white),
                   ),
                   // Text(
                   //   ' +91 ${widget.phone}',
@@ -68,22 +69,29 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                   Text(
                     'This extra step shows its really you trying to',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18,color:Colors.white70),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        color: Colors.white70),
                   ),
                   Text(
                     'sign in',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18,color:Colors.white70),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        color: Colors.white70),
                   ),
                   SizedBox(
                     height: size.height * 0.1,
-                  ),Text(
-                  'Enter PIN',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
+                  ),
+                  Text(
+                    'Enter PIN',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
                   Container(
                       alignment: Alignment.centerLeft,
                       height: MediaQuery.of(context).size.height * 0.1,
@@ -98,28 +106,29 @@ class _OTPScreenState extends State<OTPScreen> {
                         },
                         onSubmitted: (enteredOTP) async {
                           //print('==========================');
-                          await _auth
-                              .signInWithCredential(PhoneAuthProvider.credential(
-                                  verificationId: verificationIDRecieved,
-                                  smsCode: enteredOTP))
-                              .then((value) async {
-                            if (value.user != null) {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomePage()),
-                                  (route) => false);
-                            } else {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          CreateAcc(widget.phone)));
-                            }
-                          });
+                          // await _auth
+                          //     .signInWithCredential(
+                          //         PhoneAuthProvider.credential(
+                          //             verificationId: verificationIDRecieved,
+                          //             smsCode: enteredOTP))
+                          //     .then((value) async {
+                          //   if (value.user != null) {
+                          //     Navigator.pushAndRemoveUntil(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: (context) => HomePage()),
+                          //         (route) => false);
+                          //   } else {
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: (context) =>
+                          //                 CreateAcc(widget.phone)));
+                          //   }
+                          // });
                         },
                         decoration: InputDecoration(
-                          fillColor: Color(0xff3D346F),
+                            fillColor: Color(0xff3D346F),
                             filled: true,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
@@ -127,9 +136,10 @@ class _OTPScreenState extends State<OTPScreen> {
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide:
-                                  const BorderSide(color: Colors.white54, width: 2.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: const BorderSide(
+                                  color: Colors.white54, width: 2.0),
                             ),
                             hintText: '4-digit Pin',
                             hintStyle: TextStyle(
@@ -144,25 +154,15 @@ class _OTPScreenState extends State<OTPScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ElevatedButton(
                       onPressed: () async {
-                        if (enteredOTP.length < 6) {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  content: Text('Invalid PIN'),
-                                );
-                              });
-                        } else {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CreateAcc(widget.phone)));
-                        }
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                            (route) => false);
                       },
                       child: Text(
                         'Submit',
                         style: TextStyle(
-                        color: Color(0xff2C4D8D),
+                          color: Color(0xff2C4D8D),
                           fontWeight: FontWeight.w800,
                           fontSize: 25,
                         ),
@@ -172,7 +172,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         elevation: 10,
-                      primary: Color(0xff38C1FF),
+                        primary: Color(0xff38C1FF),
                         padding: EdgeInsets.symmetric(
                             horizontal: size.width * 0.36,
                             vertical: size.height * 0.02),
@@ -242,6 +242,6 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   void initState() {
     super.initState();
-    verifyPhone();
+    // verifyPhone();
   }
 }
