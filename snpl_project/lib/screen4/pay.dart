@@ -155,6 +155,7 @@ class _PayPageState extends State<PayPage> {
 
                       if (paymentStatus) {
                         await Database.postTransactions(
+                          payeeName,
                           widget.vpa,
                           int.parse(_controller.text),
                         );

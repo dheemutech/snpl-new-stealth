@@ -27,17 +27,33 @@ class Database {
     return true;
   }
 
+  static Future<String> fetchPin() async {
+    try {
+      var docSnapshot =
+          await _collectionReferenceUSER.doc(Database.currentUser.id).get();
+      if (docSnapshot.exists) {
+        Map<String, dynamic> data = docSnapshot.data()! as Map<String, dynamic>;
+
+        return data['pin'];
+      }
+    } catch (e) {
+      //print(e);
+    }
+    return '';
+  }
+
   static Stream<QuerySnapshot> readTransactions() {
     CollectionReference transactionCollection =
         _collectionReferenceTRANSACTION.doc().collection("TRANSACTIONS");
     return transactionCollection.snapshots();
   }
 
-  static Future<void> postTransactions(String vpa, int payment) async {
+  static Future<void> postTransactions(String payeeName, String vpa, int payment) async {
     try {
       DocumentReference documentReference =
           _collectionReferenceTRANSACTION.doc();
       Map<String, dynamic> data = <String, dynamic>{
+        "payee_name": payeeName,
         "vpa": vpa,
         "payment": payment,
         "user_id": Database.currentUser.id,
@@ -60,12 +76,13 @@ class Database {
   }
 
   static Future<void> addUser(
-      String name, String email, int phoneNumber) async {
+      String name, String email, int phoneNumber, String pin) async {
     try {
       Map<String, dynamic> data = <String, dynamic>{
         "name": name,
         "email": email,
         "phone_number": phoneNumber,
+        "pin": pin,
         // "aadhar_number": aadharNumber,
         "credit_left": 1000, // default credit
       };

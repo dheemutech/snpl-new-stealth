@@ -317,7 +317,8 @@ class _CreateAccState extends State<CreateAcc> {
                             Database.addUser(
                                 nameController.text,
                                 emailController.text,
-                                int.parse(widget.phoneNumber));
+                                int.parse(widget.phoneNumber),
+                                enteredOTP!);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

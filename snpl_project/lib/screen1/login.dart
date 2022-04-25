@@ -152,9 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             int.parse(phoneController.text));
 
                         if (existingUser) {
+                          String pin = await Database.fetchPin();
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => OTPScreen(
-                                  phoneController.text)));
+                                  phoneController.text, pin)));
                         } else {
                           Navigator.push(
                               context,

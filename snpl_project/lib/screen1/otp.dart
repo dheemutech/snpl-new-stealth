@@ -2,12 +2,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screen2/createacc.dart';
 import '../screens3/homepage.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
-  const OTPScreen(this.phone);
+  final String pin;
+  const OTPScreen(this.phone, this.pin);
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -154,10 +154,23 @@ class _OTPScreenState extends State<OTPScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ElevatedButton(
                       onPressed: () async {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                            (route) => false);
+                        print(enteredOTP);
+                        print(widget.pin);
+                        if (enteredOTP == widget.pin) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text('Invalid PIN'),
+                                );
+                              });
+                        }
                       },
                       child: Text(
                         'Submit',

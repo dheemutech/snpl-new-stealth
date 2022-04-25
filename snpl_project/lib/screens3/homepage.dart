@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../screen4/pay.dart';
+import '../services/database.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -19,9 +20,16 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   String qrcode = ' ';
+  String creditLeft = "";
   @override
   void initState() {
     super.initState();
+    setCreditLeft();
+  }
+
+  void setCreditLeft() async {
+    creditLeft = await Database.fetchCredit();
+    setState(() {});
   }
 
   @override
@@ -58,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             size: 38,
                           ),
-                          Text('500',
+                          Text(creditLeft,
                               style: TextStyle(
                                   fontSize: 40,
                                   color: Colors.white,
@@ -116,6 +124,7 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('TRANSACTION')
+                        .where('user_id', isEqualTo: Database.currentUser.id)
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -154,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
                                           child: Text(
-                                            document['vpa'],
+                                            document['payee_name'],
                                             style: TextStyle(
                                                 fontSize: 25,
                                                 color: Colors.white60,
