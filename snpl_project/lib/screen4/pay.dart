@@ -164,7 +164,10 @@ class _PayPageState extends State<PayPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ConfirmationPage()),
+                              builder: (context) => ConfirmationPage(
+                                    vpa: '',
+                                    value: _controller.text,
+                                  )),
                         );
                       } else {
                         Navigator.push(
