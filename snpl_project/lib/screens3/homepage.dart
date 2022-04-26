@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
                                           child: Text(
-                                            document['payee_name'],
+                                            document['payee_name'].split(' ')[0],
                                             style: TextStyle(
                                                 fontSize: 25,
                                                 color: Colors.white60,

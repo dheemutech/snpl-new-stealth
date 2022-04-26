@@ -62,34 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: size.height * 0.05,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'you will recieve a ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18,
-                          color: Colors.white70),
-                    ),
-                    Text(
-                      'One Time Password',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                          color: Colors.white70),
-                    )
-                  ],
-                ),
-                Text(
-                  'to this number',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18,
-                      color: Colors.white70),
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
                 Text(
                   'Phone Number',
                   style: TextStyle(

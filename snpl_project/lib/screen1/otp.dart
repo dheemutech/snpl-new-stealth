@@ -54,7 +54,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     height: size.height * 0.02,
                   ),
                   Text(
-                    'Enter the 4-digit Pin',
+                    'Enter the 6-digit Pin',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 28,
@@ -141,7 +141,7 @@ class _OTPScreenState extends State<OTPScreen> {
                               borderSide: const BorderSide(
                                   color: Colors.white54, width: 2.0),
                             ),
-                            hintText: '4-digit Pin',
+                            hintText: '6-digit Pin',
                             hintStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20,
