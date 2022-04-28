@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:snpl_project/screens3/view2.dart';
 import 'package:snpl_project/services/database.dart';
 
+import '../screens3/homepage.dart';
+
 class CreateAcc extends StatefulWidget {
   const CreateAcc(this.phoneNumber, {Key? key}) : super(key: key);
   final String phoneNumber;
@@ -225,7 +227,7 @@ class _CreateAccState extends State<CreateAcc> {
                                     borderSide: const BorderSide(
                                         color: Colors.white54, width: 2.0),
                                   ),
-                                  hintText: '4-digit Pin',
+                                  hintText: '6-digit Pin',
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
@@ -270,7 +272,7 @@ class _CreateAccState extends State<CreateAcc> {
                                     borderSide: const BorderSide(
                                         color: Colors.white54, width: 2.0),
                                   ),
-                                  hintText: '4-digit Pin',
+                                  hintText: '6-digit Pin',
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
@@ -319,10 +321,11 @@ class _CreateAccState extends State<CreateAcc> {
                                 emailController.text,
                                 int.parse(widget.phoneNumber),
                                 enteredOTP!);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ViewPage2()));
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
                           }
                         },
                         child: Text(
