@@ -125,6 +125,8 @@ class _HomePageState extends State<HomePage> {
                     stream: FirebaseFirestore.instance
                         .collection('TRANSACTION')
                         .where('user_id', isEqualTo: Database.currentUser.id)
+                        .orderBy('date_time', descending: true)
+                        .limit(5)
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
