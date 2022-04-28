@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterUxcam.optIntoSchematicRecordings();
-    FlutterUxcam.startWithKey("4nzo9i0qafqjtog");
+    FlutterUxcam.startWithKey("41kxrerao7psfio");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
