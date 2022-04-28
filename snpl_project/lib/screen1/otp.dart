@@ -154,8 +154,6 @@ class _OTPScreenState extends State<OTPScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ElevatedButton(
                       onPressed: () async {
-                        print(enteredOTP);
-                        print(widget.pin);
                         if (enteredOTP == widget.pin) {
                           Navigator.pushAndRemoveUntil(
                               context,

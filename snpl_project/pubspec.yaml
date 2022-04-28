@@ -47,6 +47,7 @@ dependencies:
   govt_documents_validator: ^0.0.1
   flutter_flurry_sdk: ^2.0.0
   flutter_uxcam: ^2.0.1
+  amplitude_flutter: ^3.2.1
 
 dev_dependencies:
   flutter_test:
