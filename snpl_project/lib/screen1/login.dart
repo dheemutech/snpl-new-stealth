@@ -33,21 +33,29 @@ class _LoginScreenState extends State<LoginScreen> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: Color(0xff271D5F),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                Text('Enter your mobile number',
+      body: SizedBox(
+        height: size.height,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.05,
+                  ),
+                  Text('Enter your mobile number',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Colors.white)),
+                  Text(
+                    'to get started',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -96,67 +104,62 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: const BorderSide(
-                                color: Colors.white54, width: 2.0),
-                          ),
-                          hintText: 'Phone No.',
-                          prefixIcon: Icon(
-                            Icons.call,
-                            color: Color(0xffFF9838),
-                          ),
-                          hintStyle: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                              color: Color(0xffC9C9C9))),
-                    )),
-                SizedBox(
-                  height: size.height * 0.4,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10, top: 30),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        bool existingUser = await Database.userExists(
-                            int.parse(phoneController.text));
+                            hintText: 'Phone No.',
+                            prefixIcon: Icon(
+                              Icons.call,
+                              color: Color(0xffFF9838),
+                            ),
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: Color(0xffC9C9C9))),
+                      )),
+                  SizedBox(
+                    height: size.height * 0.4,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, top: 30),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          bool existingUser = await Database.userExists(
+                              int.parse(phoneController.text));
 
-                        if (existingUser) {
-                          String pin = await Database.fetchPin();
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => OTPScreen(
-                                  phoneController.text, pin)));
-                        } else {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CreateAcc(phoneController.text)));
+                          if (existingUser) {
+                            String pin = await Database.fetchPin();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => OTPScreen(
+                                    phoneController.text, pin)));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreateAcc(phoneController.text)));
+                          }
                         }
-                      }
-                    },
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Color(0xff2C4D8D),
-                        fontWeight: FontWeight.w800,
-                        fontSize: 25,
+                      },
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                          color: Color(0xff2C4D8D),
+                          fontWeight: FontWeight.w800,
+                          fontSize: 25,
+                        ),
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 10,
+                        primary: Color(0xff38C1FF),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.34,
+                            vertical: size.height * 0.02),
                       ),
-                      elevation: 10,
-                      primary: Color(0xff38C1FF),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.34,
-                          vertical: size.height * 0.02),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
