@@ -137,40 +137,44 @@ class _PayPageState extends State<PayPage> {
                           context,
                           MaterialPageRoute(builder: (context) => ErrorPage()),
                         );
-                      }
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Loader()),
-                      );
-                      String id = await postPayment(
-                          widget.vpa, int.parse(_controller.text));
-                      if (id == 'error') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ErrorPage()),
-                        );
                         return;
-                      }
-                      bool paymentStatus = await isPaymentComplete(id);
-
-                      if (paymentStatus) {
-                        await Database.postTransactions(
-                          payeeName,
-                          widget.vpa,
-                          int.parse(_controller.text),
-                        );
-                        await Database.deductCredit(
-                            int.parse(_controller.text));
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ConfirmationPage()),
-                        );
                       } else {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ErrorPage()),
+                          MaterialPageRoute(builder: (context) => Loader()),
                         );
+                        String id = await postPayment(
+                            widget.vpa, int.parse(_controller.text));
+                        if (id == 'error') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ErrorPage()),
+                          );
+                          return;
+                        }
+                        
+                        bool paymentStatus = await isPaymentComplete(id);
+                        if (paymentStatus) {
+                          await Database.postTransactions(
+                            payeeName,
+                            widget.vpa,
+                            int.parse(_controller.text),
+                          );
+                          await Database.deductCredit(
+                              int.parse(_controller.text));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfirmationPage()),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ErrorPage()),
+                          );
+                        }
                       }
                     },
                     child: Text(
