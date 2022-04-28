@@ -54,66 +54,67 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           color: Colors.white)),
+                  Text('to get started',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Colors.white)),
                   Text(
                     'to get started',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: Colors.white)),
-                Text(
-                  'to get started',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.white),
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                Text(
-                  'Phone Number',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
-                Container(
+                        color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.05,
+                  ),
+                  Text(
+                    'Phone Number',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
                     alignment: Alignment.centerLeft,
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: phoneController,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                      maxLength: 10,
-                      cursorColor: Color(0xffFF9838),
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Please enter phone number';
-                        } else if (value.length < 10 ||
-                            int.tryParse(value) == null) {
-                          return 'Enter valid phone number';
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
+                        keyboardType: TextInputType.number,
+                        controller: phoneController,
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        maxLength: 10,
+                        cursorColor: Color(0xffFF9838),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please enter phone number';
+                          } else if (value.length < 10 ||
+                              int.tryParse(value) == null) {
+                            return 'Enter valid phone number';
+                          } else {
+                            return null;
+                          }
+                        },
+                        decoration: InputDecoration(
                           fillColor: Color(0xff3D346F),
                           filled: true,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
-                            hintText: 'Phone No.',
-                            prefixIcon: Icon(
-                              Icons.call,
-                              color: Color(0xffFF9838),
-                            ),
-                            hintStyle: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                color: Color(0xffC9C9C9))),
-                      )),
+                          ),
+                          hintText: 'Phone No.',
+                          prefixIcon: Icon(
+                            Icons.call,
+                            color: Color(0xffFF9838),
+                          ),
+                          hintStyle: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: Color(0xffC9C9C9)),
+                        )),
+                  ),
                   SizedBox(
                     height: size.height * 0.4,
                   ),
@@ -128,13 +129,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (existingUser) {
                             String pin = await Database.fetchPin();
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => OTPScreen(
-                                    phoneController.text, pin)));
+                                builder: (context) =>
+                                    OTPScreen(phoneController.text, pin)));
                           } else {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateAcc(phoneController.text)));
+                                    builder: (context) =>
+                                        CreateAcc(phoneController.text)));
                           }
                         }
                       },
