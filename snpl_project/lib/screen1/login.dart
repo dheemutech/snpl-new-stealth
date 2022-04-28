@@ -54,11 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           color: Colors.white)),
-                  Text('to get started',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white)),
                   Text(
                     'to get started',
                     style: TextStyle(
