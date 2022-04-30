@@ -47,6 +47,8 @@ dependencies:
   govt_documents_validator: ^0.0.1
   flutter_flurry_sdk: ^2.0.0
   flutter_uxcam: ^2.0.1
+  animated_splash_screen: ^1.2.0
+  page_transition: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +81,7 @@ flutter:
     - home.png
     - success.gif
     - fail.gif
+    - loader.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

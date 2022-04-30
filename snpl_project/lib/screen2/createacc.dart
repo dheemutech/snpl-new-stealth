@@ -2,8 +2,9 @@
 
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snpl_project/screens3/view2.dart';
 import 'package:snpl_project/services/database.dart';
+
+import '../screen3/view2.dart';
 
 class CreateAcc extends StatefulWidget {
   const CreateAcc(this.phoneNumber, {Key? key}) : super(key: key);

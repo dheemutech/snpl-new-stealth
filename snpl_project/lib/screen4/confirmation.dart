@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../screens3/homepage.dart';
-import '../screens3/subTile.dart';
+import '../screen3/homepage.dart';
+import '../screen3/subTile.dart';
 
 class ConfirmationPage extends StatefulWidget {
   const ConfirmationPage({Key? key, required this.vpa, required this.value})
@@ -21,8 +21,8 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
   void initState() {
     super.initState();
     ConfirmationPage(
-      vpa: '',
-      value: '',
+      vpa: widget.vpa,
+      value: widget.value,
     );
   }
 
@@ -86,7 +86,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                           child: Row(
                             children: [
                               Text(
-                                " ${widget.vpa}",
+                                widget.vpa,
                                 style: TextStyle(
                                   color: Color(0xff000000),
                                   fontWeight: FontWeight.w800,
@@ -94,6 +94,14 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                                 ),
                               ),
                               Spacer(),
+                              Text(
+                                "₹",
+                                style: TextStyle(
+                                  color: Color(0xff000000),
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 25,
+                                ),
+                              ),
                               Text(
                                 " ${widget.value}",
                                 style: TextStyle(

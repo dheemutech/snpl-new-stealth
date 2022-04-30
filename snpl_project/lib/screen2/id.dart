@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:snpl_project/screens3/homepage.dart';
+
+import '../screen3/homepage.dart';
 
 class IDProof extends StatefulWidget {
   const IDProof({Key? key}) : super(key: key);

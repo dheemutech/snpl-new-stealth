@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:snpl_project/screen1/login.dart';
+import '../screen3/loader.dart';
 import '../services/database.dart';
 import '../services/payment.dart';
 import 'confirmation.dart';
 import 'error.dart';
-import '../screens3/loader.dart';
 
 class PayPage extends StatefulWidget {
   final String vpa;
@@ -165,7 +165,7 @@ class _PayPageState extends State<PayPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ConfirmationPage(
-                                    vpa: '',
+                                    vpa: widget.vpa,
                                     value: _controller.text,
                                   )),
                         );

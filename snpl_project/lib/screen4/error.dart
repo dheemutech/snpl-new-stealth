@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../screens3/homepage.dart';
-import '../screens3/subTile.dart';
+import '../screen3/homepage.dart';
+import '../screen3/subTile.dart';
 
 class ErrorPage extends StatefulWidget {
   const ErrorPage({Key? key}) : super(key: key);

@@ -101,9 +101,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return _buildQrView(context);
-                      }));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return _buildQrView(context);
+                    }));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

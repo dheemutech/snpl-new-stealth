@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../screens3/homepage.dart';
 
+import '../screen3/homepage.dart';
 class OTPScreen extends StatefulWidget {
   final String phone;
   final String pin;
