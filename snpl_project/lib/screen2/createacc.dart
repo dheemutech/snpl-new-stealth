@@ -2,6 +2,7 @@
 
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:snpl_project/screen3/homepage.dart';
 import 'package:snpl_project/services/database.dart';
 
 import '../screen3/view2.dart';
@@ -58,12 +59,14 @@ class _CreateAccState extends State<CreateAcc> {
                       SizedBox(
                         height: size.height * 0.02,
                       ),
-                      Text(
-                        "Create your account",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Color(0xffffffff),
+                      Center(
+                        child: Text(
+                          "Create your account",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Color(0xffffffff),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -186,7 +189,7 @@ class _CreateAccState extends State<CreateAcc> {
                               keyboardType: TextInputType.number,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
-                              maxLength: 6,
+                              maxLength: 4,
                               onChanged: (pin) {
                                 enteredOTP = pin;
                               },
@@ -226,7 +229,7 @@ class _CreateAccState extends State<CreateAcc> {
                                     borderSide: const BorderSide(
                                         color: Colors.white54, width: 2.0),
                                   ),
-                                  hintText: '4-digit Pin',
+                                  hintText: 'XXXX',
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
@@ -253,7 +256,7 @@ class _CreateAccState extends State<CreateAcc> {
                               keyboardType: TextInputType.number,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
-                              maxLength: 6,
+                              maxLength: 4,
                               onChanged: (pin) {
                                 enteredOTP = pin;
                               },
@@ -271,7 +274,7 @@ class _CreateAccState extends State<CreateAcc> {
                                     borderSide: const BorderSide(
                                         color: Colors.white54, width: 2.0),
                                   ),
-                                  hintText: '4-digit Pin',
+                                  hintText: 'XXXX',
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
@@ -320,10 +323,11 @@ class _CreateAccState extends State<CreateAcc> {
                                 emailController.text,
                                 int.parse(widget.phoneNumber),
                                 enteredOTP!);
-                            Navigator.push(
+                            Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ViewPage2()));
+                                    builder: (context) => HomePage()),
+                                (route) => false);
                           }
                         },
                         child: Text(

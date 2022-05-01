@@ -57,6 +57,7 @@ class Database {
         "vpa": vpa,
         "payment": payment,
         "user_id": Database.currentUser.id,
+        "date_time": DateTime.now().toIso8601String()
       };
       await documentReference.set(data);
     } catch (e) {

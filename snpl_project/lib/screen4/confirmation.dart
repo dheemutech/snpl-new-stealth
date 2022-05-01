@@ -124,8 +124,10 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: ElevatedButton(
                 onPressed: () async {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                      (route) => false);
                 },
                 child: Text(
                   'Ok',

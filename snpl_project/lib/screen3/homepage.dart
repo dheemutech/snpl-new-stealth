@@ -125,6 +125,8 @@ class _HomePageState extends State<HomePage> {
                     stream: FirebaseFirestore.instance
                         .collection('TRANSACTION')
                         .where('user_id', isEqualTo: Database.currentUser.id)
+                        .orderBy('date_time', descending: true)
+                        .limit(5)
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -164,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
                                           child: Text(
-                                            document['payee_name'],
+                                            document['payee_name'].split(' ')[0],
                                             style: TextStyle(
                                                 fontSize: 25,
                                                 color: Colors.white60,
