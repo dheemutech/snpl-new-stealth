@@ -37,90 +37,74 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Color(0xff271D5F),
-            body: Column(
+            backgroundColor: Color(0xffFFFFFF),
+            body: Stack(
               children: [
-                Container(
-                  width: size.width,
-                  height: 200,
-                  color: Color(0xff0e7c7b),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: size.height * 0.08,
-                      ),
-                      Text(
-                        'You have a credit limit of',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.currency_rupee,
-                            color: Colors.white,
-                            size: 38,
-                          ),
-                          Text(creditLeft,
-                              style: TextStyle(
-                                  fontSize: 40,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                    ],
+                Align(
+                  alignment: AlignmentDirectional(-0.02, -0.9),
+                  child: Image(
+                    image: AssetImage('card.png'),
+                    height: size.height * 0.3,
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                ElevatedButton(
+                Align(
+                  alignment: AlignmentDirectional(-0.3, -0.6),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.qr_code_scanner,
-                        size: 35,
-                        color: Color(0xffb10f2e),
+                        Icons.currency_rupee,
+                        color: Colors.white,
+                        size: 30,
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Scan and Pay',
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Color(0xff2C4D8D),
-                        ),
-                      ),
+                      Text(creditLeft,
+                          style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return _buildQrView(context);
-                    }));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35.0),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(0.03, -0.23),
+                  child: ElevatedButton(
+                    child: Text(
+                      'Scan And Pay Now',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xffffffff),
+                      ),
                     ),
-                    elevation: 10,
-                    primary: Color(0xff38C1FF),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: size.width * 0.1,
-                        vertical: size.height * 0.02),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return _buildQrView(context);
+                      }));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                      ),
+                      //elevation: 10,
+                      primary: Color(0xff3C80FF),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.07,
+                          vertical: size.height * 0.02),
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.05,
+                Align(
+                  alignment: AlignmentDirectional(-0.83, -0.05),
+                  child: Text(
+                    'Recent Transactions',
+                    style: TextStyle(
+                      color: Color(0XFF3C80FF),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                Align(
+                  alignment: AlignmentDirectional(-0.14, 0.4),
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('TRANSACTION')
@@ -135,69 +119,53 @@ class _HomePageState extends State<HomePage> {
                           child: CircularProgressIndicator(),
                         );
                       } else {
-                        return Column(
-                          children: [
-                            Center(
-                              child: Text(
-                                'Recent Transactions',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                        return ListView(
+                          padding: EdgeInsets.all(10),
+                          shrinkWrap: true,
+                          children: snapshot.data!.docs.map((document) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              width: size.width,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              decoration: BoxDecoration(
-                                  color: Color(0xff31081f),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: ListView(
-                                padding: EdgeInsets.all(10),
-                                shrinkWrap: true,
-                                children: snapshot.data!.docs.map((document) {
-                                  return Column(
+                                elevation: 8,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 12),
+                                  child: Column(
                                     children: [
                                       Row(children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Text(
-                                            document['payee_name'].split(' ')[0],
-                                            style: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.white60,
-                                                fontWeight: FontWeight.w500),
-                                          ),
+                                        Icon(
+                                          Icons.account_circle_outlined,
+                                          color: Color(0xff3C80FF),
+                                          size: 30,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          document['payee_name'].split(' ')[0],
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Color(0xff3C80FF),
+                                              fontWeight: FontWeight.w500),
                                         ),
                                         Spacer(),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              'Rs ',
-                                              style: TextStyle(
-                                                  color: Colors.yellow,
-                                                  fontSize: 25),
-                                            ),
-                                            Text(
-                                              document['payment'].toString(),
-                                              style: TextStyle(
-                                                  fontSize: 25,
-                                                  color: Colors.yellow,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ],
+                                        Text(
+                                          '₹${document['payment'].toString()}',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xff3C80FF),
+                                              fontWeight: FontWeight.w500),
                                         ),
                                       ]),
                                     ],
-                                  );
-                                }).toList(),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
+                            );
+                          }).toList(),
                         );
                       }
                     },

@@ -122,13 +122,6 @@ class _PayPageState extends State<PayPage> {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Column(
                 children: [
-                  Text(
-                    'FROM HDFC a/c XX7383',
-                    style: TextStyle(fontSize: 15, color: Colors.white60),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
                   ElevatedButton(
                     onPressed: () async {
                       if (int.parse(await Database.fetchCredit()) <

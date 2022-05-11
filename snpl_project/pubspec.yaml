@@ -47,6 +47,9 @@ dependencies:
   flutter_flurry_sdk: ^2.0.0
   flutter_uxcam: ^2.0.1
   amplitude_flutter: ^3.2.1
+  animated_splash_screen: ^1.2.0
+  google_fonts: ^2.3.2
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +83,8 @@ flutter:
     - success.gif
     - fail.gif
     - loader.gif
+    - scan.png
+    - card.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

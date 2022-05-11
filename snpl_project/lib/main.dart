@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_flurry_sdk/flurry.dart';
 import 'package:flutter_uxcam/flutter_uxcam.dart';
-import 'package:snpl_project/screen1/login.dart';
+import 'package:snpl_project/screen1/firstpage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     Amplitude.getInstance().init("43236ebd8f8fc3b45ca1dd2cace2ee22");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: Loading(),
     );
   }
 }

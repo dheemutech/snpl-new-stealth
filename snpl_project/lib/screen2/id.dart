@@ -20,7 +20,7 @@ class _IDProofState extends State<IDProof> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff271D5F),
+      backgroundColor: Color(0xff3c80FF),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,7 +30,7 @@ class _IDProofState extends State<IDProof> {
           IconButton(
             icon: Icon(Icons.close),
             iconSize: 40,
-            color: Color(0xffFF9838),
+            color: Color(0xff182825),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -38,8 +38,7 @@ class _IDProofState extends State<IDProof> {
           SizedBox(
             height: size.height * 0.02,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
+          Center(
             child: Text(
               "ID-proof",
               style: TextStyle(
@@ -49,18 +48,17 @@ class _IDProofState extends State<IDProof> {
               ),
             ),
           ),
-          SizedBox(
-            height: size.height * 0.05,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
+          Center(
             child: Text(
-              "ID number (Adhaar Number)",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20,color: Colors.white),
+              "(Adhaar Number)",
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                  color: Colors.white),
             ),
           ),
           SizedBox(
-            height: size.height * 0.08,
+            height: size.height * 0.2,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
@@ -68,20 +66,22 @@ class _IDProofState extends State<IDProof> {
               width: size.width - 10,
               child: OTPTextField(
                 controller: adhaarcontroller,
-                otpFieldStyle:
-                    OtpFieldStyle(backgroundColor: Colors.transparent,enabledBorderColor: Colors.white),
+                otpFieldStyle: OtpFieldStyle(
+                    backgroundColor: Colors.transparent,
+                    enabledBorderColor: Colors.white),
                 length: 12,
                 width: size.width * 0.1,
                 fieldWidth: 15,
-                style: TextStyle(fontSize: 20,color: Colors.white),
+                style: TextStyle(fontSize: 20, color: Colors.white),
                 textFieldAlignment: MainAxisAlignment.spaceAround,
                 fieldStyle: FieldStyle.underline,
               ),
             ),
           ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
+          SizedBox(
+            height: size.height*0.1,
+          ),
+          Center(
             child: ElevatedButton(
               onPressed: () async {
                 Navigator.push(context,
@@ -90,7 +90,7 @@ class _IDProofState extends State<IDProof> {
               child: Text(
                 'Start',
                 style: TextStyle(
-                  color: Color(0xff2C4D8D),
+                  color: Color(0xffffffff),
                   fontWeight: FontWeight.w800,
                   fontSize: 25,
                 ),
@@ -100,9 +100,9 @@ class _IDProofState extends State<IDProof> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 elevation: 10,
-                primary: Color(0xff38C1FF),
+                primary: Color(0xff000000),
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.38,
+                    horizontal: size.width * 0.3,
                     vertical: size.height * 0.02),
               ),
             ),
